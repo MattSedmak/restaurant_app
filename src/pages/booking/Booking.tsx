@@ -7,7 +7,7 @@ const Booking = () => {
   const seatingHandler = (seatTime: number) => {
     setSeating(seatTime);
   };
-  console.log(seating);
+
   return (
     <div>
       <h2>Make a booking</h2>
