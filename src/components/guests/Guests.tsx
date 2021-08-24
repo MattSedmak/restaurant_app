@@ -1,4 +1,3 @@
-import { isPropertySignature } from 'typescript';
 import { GuestNumber } from './GuestStyles';
 interface IGuestNumberProps {
   onGuestSelect: (guest: number) => void;
