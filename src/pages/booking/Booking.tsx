@@ -3,8 +3,8 @@ import Guests from '../../components/guests/Guests';
 import Seating from '../../components/seating/Seating';
 import axios, { AxiosResponse } from 'axios';
 import { IAvailable } from '../../models/IAvailable';
-import Calendar from 'react-calendar';
-import { differenceInCalendarDays } from 'date-fns'
+import Calendar, { CalendarTileProperties } from 'react-calendar';
+import { differenceInCalendarDays } from 'date-fns';
 import 'react-calendar/dist/Calendar.css';
 
 const Booking = () => {
@@ -14,9 +14,8 @@ const Booking = () => {
   const [allBookings, setAllBookings] = useState<IAvailable[]>([]);
   const [isNotAvailable, setIsNotAvailable] = useState<IAvailable[]>([]);
 
-
-  // const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
-  const baseUrl: string = 'http://localhost:4000';
+  const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
+  //const baseUrl: string = 'http://localhost:4000';
 
   const getAvailability = async () => {
     try {
@@ -25,8 +24,8 @@ const Booking = () => {
           guests: guests,
           seating: seating,
         },
-      }); 
-      setAllBookings(res.data) 
+      });
+      setAllBookings(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -37,11 +36,31 @@ const Booking = () => {
     filterDates();
   }, [guests, seating]);
 
+  // useEffect(() => {
+  //   tileDisabled();
+  // }, [isNotAvailable]);
+
   const filterDates = () => {
-    const someDates = allBookings.filter
-    ((booking) => booking.isAvailable === false)
-    
-  }
+    const falseDates = allBookings.filter(
+      (booking) => booking.isAvailable === false
+    );
+    setIsNotAvailable(falseDates);
+  };
+
+  const tileDisabled = (props: CalendarTileProperties): boolean => {
+    const disabledDates = [];
+    for (let i = 0; i < isNotAvailable.length; i++) {
+      disabledDates.push(isNotAvailable[i].date);
+    }
+    if (props.view === 'month') {
+      //return disabledDates.find(dDate => dDate === props.date)
+    }
+    return false;
+  };
+
+  // function isSameDay(a: any, b: any) {
+  //   return differenceInCalendarDays(a, b) === 0;
+  // }
 
   const seatingHandler = (seatTime: number) => {
     setSeating(seatTime);
@@ -56,10 +75,13 @@ const Booking = () => {
       <Seating onSeatTime={seatingHandler} />
       <Guests onGuestSelect={guestHandler} />
       <div className='calendar-container'>
-        <Calendar 
-          onChange={setDate} 
-          value={date} 
-          minDate={new Date()} />
+        <Calendar
+          onChange={setDate}
+          value={date}
+          minDate={new Date()}
+          // tileDisabled={({ date }) => date.getDay() === 0}
+          tileDisabled={tileDisabled}
+        />
       </div>
     </div>
   );
