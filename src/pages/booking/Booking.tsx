@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import Guests from '../../components/guests/Guests';
 import Seating from '../../components/seating/Seating';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { IAvailable } from '../../models/IAvailable';
 import Calendar, { CalendarTileProperties } from 'react-calendar';
-import { differenceInCalendarDays, isSameDay } from 'date-fns';
+import { differenceInCalendarDays, isSameDay, parseISO } from 'date-fns';
 import 'react-calendar/dist/Calendar.css';
 
 const Booking = () => {
@@ -14,8 +14,8 @@ const Booking = () => {
   const [allBookings, setAllBookings] = useState<IAvailable[]>([]);
   const [isNotAvailable, setIsNotAvailable] = useState<IAvailable[]>([]);
 
-  // const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
-  const baseUrl: string = 'http://localhost:4000';
+  const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
+  // const baseUrl: string = 'http://localhost:4000';
 
   const getAvailability = async () => {
     try {
@@ -40,42 +40,45 @@ const Booking = () => {
     const falseDates = allBookings.filter(
       (booking) => booking.isAvailable === false
     );
+    // console.log(falseDates)
     setIsNotAvailable(falseDates);
   };
 
-  // if (isNotAvailable.length > 0) {
-  //   console.log(isNotAvailable);
-  // }
+  const testFunction = (props: CalendarTileProperties): boolean => {
 
-  // const tileDisabled = (props: CalendarTileProperties): boolean => {
-  //   if (isNotAvailable.length > 0) {
-  //     return true;
-  //   }
-  // };
-
-  // ***
-
-  // ***
-
-  const tileDisabled = (props: CalendarTileProperties): boolean => {
     const disabledDates = [];
-    let unAvailableDate: boolean = false;
+    let someDate: boolean = false;
 
-    if (isNotAvailable.length > 0) {
       for (let i = 0; i < isNotAvailable.length; i++) {
         disabledDates.push(isNotAvailable[i].date);
       }
-    }
-
-    if (props.view === 'month') {
-      for (let i = 0; i < disabledDates.length; i++) {
-        disabledDates[i].toString() === props.date.toISOString()
-          ? (unAvailableDate = true)
-          : (unAvailableDate = false);
+      if (props.view === 'month') {
+        for (let i = 0; i < disabledDates.length; i++) {
+          someDate = disabledDates[i].toString() === props.date.toISOString()
+        //   // someDate = isSameDay(parseISO(disabledDates[i].toString()), parseISO(props.date.toISOString()))
+        //   return someDate;
+        }
+        
       }
-    }
-    return unAvailableDate;
-  };
+    return someDate;
+  }
+
+  // function isSameDay(a:any, b:any) {
+  //   return differenceInCalendarDays(a, b) === 0;
+  // }
+
+  // const tileDisabled = (props: CalendarTileProperties): boolean => {
+  //   const disabledDates = [];
+  //   let unAvailableDate: boolean = false;
+
+  //   if (isNotAvailable.length > 0) {
+  //     for (let i = 0; i < isNotAvailable.length; i++) {
+  //       disabledDates.push(isNotAvailable[i].date);
+  //       // console.log(isNotAvailable[i].date)
+  //     }
+  //   }
+  //   return unAvailableDate;
+  // };
 
   const seatingHandler = (seatTime: number) => {
     setSeating(seatTime);
@@ -95,7 +98,7 @@ const Booking = () => {
           value={date}
           minDate={new Date()}
           // tileDisabled={({ date }) => date.getDay() === 0}
-          // tileDisabled={tileDisabled}
+          tileDisabled={testFunction}
         />
       </div>
     </div>
