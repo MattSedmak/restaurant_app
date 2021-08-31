@@ -48,14 +48,16 @@ const Booking = () => {
     disabledDates.push(isNotAvailable[i].date);
   }
   console.log(disabledDates);
+
   const testFunction = (props: CalendarTileProperties): boolean => {
     let someDate: boolean = false;
 
     if (props.view === 'month') {
       for (let i = 0; i < disabledDates.length; i++) {
-        someDate = disabledDates[i].toString() === props.date.toISOString();
-        //   // someDate = isSameDay(parseISO(disabledDates[i].toString()), parseISO(props.date.toISOString()))
-        return someDate;
+        if (disabledDates[i].toString() === props.date.toISOString()) {
+          someDate = true;
+          console.log(props.view);
+        }
       }
     }
     return someDate;
