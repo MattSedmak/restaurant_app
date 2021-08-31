@@ -1,38 +1,33 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import Guests from '../../components/guests/Guests';
 import Seating from '../../components/seating/Seating';
 import axios from 'axios';
 import { IAvailable } from '../../models/IAvailable';
-import Calendar, { CalendarTileProperties } from 'react-calendar';
+import Calendar, {
+  CalendarProps,
+  CalendarTileProperties,
+  CalendarType,
+} from 'react-calendar';
 import { differenceInCalendarDays, isSameDay, parseISO } from 'date-fns';
 import 'react-calendar/dist/Calendar.css';
 import CustomerForm from '../../components/customerForm/CustomerForm';
 import { ICustomerInfo } from '../../models/ICustomerInfo';
 import { IBooking } from '../../models/IBooking';
 
-const InitialValue: ICustomerInfo = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  mobile: 0,
-};
-
-const InitialBookingValue: IBooking = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  mobile: 0,
-  guests: 0,
-  seating: 0,
-  date: new Date(),
-}
-
 const Booking = () => {
-  const [completeBooking, setCompleteBooking] = useState<IBooking>(InitialBookingValue)
-  const [seating, setSeating] = useState(0);
-  const [guests, setGuests] = useState(0);
-  const [date, setDate] = useState(new Date());
-  const [customerInfo, setCustomerInfo] = useState<ICustomerInfo>(InitialValue);
+  const [completeBooking, setCompleteBooking] = useState<IBooking>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    mobile: 0,
+    guests: 0,
+    seating: 0,
+    date: new Date(),
+  });
+  // const [seating, setSeating] = useState(0);
+  // const [guests, setGuests] = useState(0);
+  //const [date, setDate] = useState(new Date());
+
   const [allBookings, setAllBookings] = useState<IAvailable[]>([]);
   const [isNotAvailable, setIsNotAvailable] = useState<IAvailable[]>([]);
 
@@ -43,8 +38,8 @@ const Booking = () => {
     try {
       const res = await axios.get(baseUrl + '/availability', {
         params: {
-          guests: guests,
-          seating: seating,
+          guests: completeBooking.guests,
+          seating: completeBooking.seating,
         },
       });
       setAllBookings(res.data);
@@ -56,7 +51,7 @@ const Booking = () => {
   useEffect(() => {
     getAvailability();
     filterDates();
-  }, [guests, seating]);
+  }, [completeBooking.guests, completeBooking.seating]);
 
   const filterDates = () => {
     const falseDates = allBookings.filter(
@@ -68,8 +63,6 @@ const Booking = () => {
   for (let i = 0; i < isNotAvailable.length; i++) {
     disabledDates.push(isNotAvailable[i].date);
   }
-  
-  console.log(customerInfo)
 
   const testFunction = (props: CalendarTileProperties): boolean => {
     let someDate: boolean = false;
@@ -86,16 +79,26 @@ const Booking = () => {
   };
 
   const customerInfoHandler = (customerInfo: ICustomerInfo) => {
-    setCustomerInfo(customerInfo)
-  }
+    setCompleteBooking((prev) => ({
+      ...prev,
+      firstName: customerInfo.firstName,
+      lastName: customerInfo.lastName,
+      email: customerInfo.email,
+      mobile: customerInfo.mobile,
+    }));
+  };
 
   const seatingHandler = (seatTime: number) => {
-    setSeating(seatTime);
+    // setSeating(seatTime);
+    setCompleteBooking((prev) => ({ ...prev, seating: seatTime }));
   };
 
   const guestHandler = (guestNumber: number) => {
-    setGuests(guestNumber);
+    // setGuests(guestNumber);
+    setCompleteBooking((prev) => ({ ...prev, guests: guestNumber }));
   };
+
+  console.log(completeBooking);
   return (
     <div>
       <h2>Make a booking</h2>
@@ -103,8 +106,10 @@ const Booking = () => {
       <Guests onGuestSelect={guestHandler} />
       <div className='calendar-container'>
         <Calendar
-          onChange={setDate}
-          value={date}
+          onChange={() =>
+            setCompleteBooking((prev) => ({ ...prev, date: completeBooking.date }))
+          }
+          value={completeBooking.date}
           minDate={new Date()}
           // tileDisabled={({ date }) => date.getDay() === 0}
           tileDisabled={testFunction}
