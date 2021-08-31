@@ -6,6 +6,7 @@ import { IAvailable } from '../../models/IAvailable';
 import Calendar, { CalendarTileProperties } from 'react-calendar';
 import { differenceInCalendarDays, isSameDay, parseISO } from 'date-fns';
 import 'react-calendar/dist/Calendar.css';
+import CustomerForm from '../../components/customerForm/CustomerForm';
 
 const Booking = () => {
   const [seating, setSeating] = useState(0);
@@ -43,25 +44,23 @@ const Booking = () => {
     // console.log(falseDates)
     setIsNotAvailable(falseDates);
   };
-
+  const disabledDates: any = [];
+  for (let i = 0; i < isNotAvailable.length; i++) {
+    disabledDates.push(isNotAvailable[i].date);
+  }
+  console.log(disabledDates);
   const testFunction = (props: CalendarTileProperties): boolean => {
-
-    const disabledDates = [];
     let someDate: boolean = false;
 
-      for (let i = 0; i < isNotAvailable.length; i++) {
-        disabledDates.push(isNotAvailable[i].date);
-      }
-      if (props.view === 'month') {
-        for (let i = 0; i < disabledDates.length; i++) {
-          someDate = disabledDates[i].toString() === props.date.toISOString()
+    if (props.view === 'month') {
+      for (let i = 0; i < disabledDates.length; i++) {
+        someDate = disabledDates[i].toString() === props.date.toISOString();
         //   // someDate = isSameDay(parseISO(disabledDates[i].toString()), parseISO(props.date.toISOString()))
-        //   return someDate;
-        }
-        
+        return someDate;
       }
+    }
     return someDate;
-  }
+  };
 
   // function isSameDay(a:any, b:any) {
   //   return differenceInCalendarDays(a, b) === 0;
@@ -100,6 +99,7 @@ const Booking = () => {
           // tileDisabled={({ date }) => date.getDay() === 0}
           tileDisabled={testFunction}
         />
+        <CustomerForm />
       </div>
     </div>
   );
