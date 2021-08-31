@@ -7,11 +7,32 @@ import Calendar, { CalendarTileProperties } from 'react-calendar';
 import { differenceInCalendarDays, isSameDay, parseISO } from 'date-fns';
 import 'react-calendar/dist/Calendar.css';
 import CustomerForm from '../../components/customerForm/CustomerForm';
+import { ICustomerInfo } from '../../models/ICustomerInfo';
+import { IBooking } from '../../models/IBooking';
+
+const InitialValue: ICustomerInfo = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  mobile: 0,
+};
+
+const InitialBookingValue: IBooking = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  mobile: 0,
+  guests: 0,
+  seating: 0,
+  date: new Date(),
+}
 
 const Booking = () => {
+  const [completeBooking, setCompleteBooking] = useState<IBooking>(InitialBookingValue)
   const [seating, setSeating] = useState(0);
   const [guests, setGuests] = useState(0);
   const [date, setDate] = useState(new Date());
+  const [customerInfo, setCustomerInfo] = useState<ICustomerInfo>(InitialValue);
   const [allBookings, setAllBookings] = useState<IAvailable[]>([]);
   const [isNotAvailable, setIsNotAvailable] = useState<IAvailable[]>([]);
 
@@ -41,14 +62,14 @@ const Booking = () => {
     const falseDates = allBookings.filter(
       (booking) => booking.isAvailable === false
     );
-    // console.log(falseDates)
     setIsNotAvailable(falseDates);
   };
   const disabledDates: any = [];
   for (let i = 0; i < isNotAvailable.length; i++) {
     disabledDates.push(isNotAvailable[i].date);
   }
-  console.log(disabledDates);
+  
+  console.log(customerInfo)
 
   const testFunction = (props: CalendarTileProperties): boolean => {
     let someDate: boolean = false;
@@ -64,22 +85,9 @@ const Booking = () => {
     return someDate;
   };
 
-  // function isSameDay(a:any, b:any) {
-  //   return differenceInCalendarDays(a, b) === 0;
-  // }
-
-  // const tileDisabled = (props: CalendarTileProperties): boolean => {
-  //   const disabledDates = [];
-  //   let unAvailableDate: boolean = false;
-
-  //   if (isNotAvailable.length > 0) {
-  //     for (let i = 0; i < isNotAvailable.length; i++) {
-  //       disabledDates.push(isNotAvailable[i].date);
-  //       // console.log(isNotAvailable[i].date)
-  //     }
-  //   }
-  //   return unAvailableDate;
-  // };
+  const customerInfoHandler = (customerInfo: ICustomerInfo) => {
+    setCustomerInfo(customerInfo)
+  }
 
   const seatingHandler = (seatTime: number) => {
     setSeating(seatTime);
@@ -101,7 +109,7 @@ const Booking = () => {
           // tileDisabled={({ date }) => date.getDay() === 0}
           tileDisabled={testFunction}
         />
-        <CustomerForm />
+        <CustomerForm onCustomerHandler={customerInfoHandler} />
       </div>
     </div>
   );

@@ -21,7 +21,11 @@ const useFormFields = (InitialValue: ICustomerInfo) => {
   return { formFields, createChangeHandler };
 };
 
-export const CustomerForm = () => {
+interface IOnCustomerProps {
+  onCustomerHandler:(info: ICustomerInfo) => void;
+}
+
+export const CustomerForm = (props: IOnCustomerProps) => {
   const { formFields, createChangeHandler } = useFormFields({
     firstName: '',
     lastName: '',
@@ -31,7 +35,7 @@ export const CustomerForm = () => {
 
   const handelSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(formFields);
+    props.onCustomerHandler(formFields);
   };
 
   return (
