@@ -6,6 +6,7 @@ import { IAvailable } from '../../models/IAvailable';
 import Calendar, { CalendarTileProperties } from 'react-calendar';
 import { differenceInCalendarDays, isSameDay, parseISO } from 'date-fns';
 import 'react-calendar/dist/Calendar.css';
+import CustomerForm from '../../components/customerForm/CustomerForm';
 
 const Booking = () => {
   const [seating, setSeating] = useState(0);
@@ -98,6 +99,7 @@ const Booking = () => {
           // tileDisabled={({ date }) => date.getDay() === 0}
           tileDisabled={testFunction}
         />
+        <CustomerForm />
       </div>
     </div>
   );
