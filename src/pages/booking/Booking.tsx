@@ -43,25 +43,23 @@ const Booking = () => {
     // console.log(falseDates)
     setIsNotAvailable(falseDates);
   };
-
+  const disabledDates: any = [];
+  for (let i = 0; i < isNotAvailable.length; i++) {
+    disabledDates.push(isNotAvailable[i].date);
+  }
+  console.log(disabledDates);
   const testFunction = (props: CalendarTileProperties): boolean => {
-
-    const disabledDates = [];
     let someDate: boolean = false;
 
-      for (let i = 0; i < isNotAvailable.length; i++) {
-        disabledDates.push(isNotAvailable[i].date);
-      }
-      if (props.view === 'month') {
-        for (let i = 0; i < disabledDates.length; i++) {
-          someDate = disabledDates[i].toString() === props.date.toISOString()
+    if (props.view === 'month') {
+      for (let i = 0; i < disabledDates.length; i++) {
+        someDate = disabledDates[i].toString() === props.date.toISOString();
         //   // someDate = isSameDay(parseISO(disabledDates[i].toString()), parseISO(props.date.toISOString()))
-        //   return someDate;
-        }
-        
+        return someDate;
       }
+    }
     return someDate;
-  }
+  };
 
   // function isSameDay(a:any, b:any) {
   //   return differenceInCalendarDays(a, b) === 0;
