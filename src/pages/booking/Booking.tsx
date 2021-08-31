@@ -3,12 +3,7 @@ import Guests from '../../components/guests/Guests';
 import Seating from '../../components/seating/Seating';
 import axios from 'axios';
 import { IAvailable } from '../../models/IAvailable';
-import Calendar, {
-  CalendarProps,
-  CalendarTileProperties,
-  CalendarType,
-} from 'react-calendar';
-import { differenceInCalendarDays, isSameDay, parseISO } from 'date-fns';
+import Calendar, { CalendarTileProperties } from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import CustomerForm from '../../components/customerForm/CustomerForm';
 import { ICustomerInfo } from '../../models/ICustomerInfo';
@@ -24,9 +19,6 @@ const Booking = () => {
     seating: 0,
     date: new Date(),
   });
-  // const [seating, setSeating] = useState(0);
-  // const [guests, setGuests] = useState(0);
-  //const [date, setDate] = useState(new Date());
 
   const [allBookings, setAllBookings] = useState<IAvailable[]>([]);
   const [isNotAvailable, setIsNotAvailable] = useState<IAvailable[]>([]);
@@ -71,7 +63,6 @@ const Booking = () => {
       for (let i = 0; i < disabledDates.length; i++) {
         if (disabledDates[i].toString() === props.date.toISOString()) {
           someDate = true;
-          console.log(props.view);
         }
       }
     }
@@ -89,13 +80,15 @@ const Booking = () => {
   };
 
   const seatingHandler = (seatTime: number) => {
-    // setSeating(seatTime);
     setCompleteBooking((prev) => ({ ...prev, seating: seatTime }));
   };
 
   const guestHandler = (guestNumber: number) => {
-    // setGuests(guestNumber);
     setCompleteBooking((prev) => ({ ...prev, guests: guestNumber }));
+  };
+
+  const dateHandler = (value: Date) => {
+    setCompleteBooking((prev) => ({ ...prev, date: value }));
   };
 
   console.log(completeBooking);
@@ -106,9 +99,7 @@ const Booking = () => {
       <Guests onGuestSelect={guestHandler} />
       <div className='calendar-container'>
         <Calendar
-          onChange={() =>
-            setCompleteBooking((prev) => ({ ...prev, date: completeBooking.date }))
-          }
+          onChange={dateHandler}
           value={completeBooking.date}
           minDate={new Date()}
           // tileDisabled={({ date }) => date.getDay() === 0}
