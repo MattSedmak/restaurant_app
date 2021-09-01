@@ -1,17 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import Guests from '../../components/guests/Guests';
 import Seating from '../../components/seating/Seating';
 import axios from 'axios';
 import { IAvailable } from '../../models/IAvailable';
 import Calendar, { CalendarTileProperties } from 'react-calendar';
-import { differenceInCalendarDays, isSameDay, parseISO } from 'date-fns';
 import 'react-calendar/dist/Calendar.css';
 import CustomerForm from '../../components/customerForm/CustomerForm';
+import { ICustomerInfo } from '../../models/ICustomerInfo';
+import { IBooking } from '../../models/IBooking';
 
 const Booking = () => {
-  const [seating, setSeating] = useState(0);
-  const [guests, setGuests] = useState(0);
-  const [date, setDate] = useState(new Date());
+  const [completeBooking, setCompleteBooking] = useState<IBooking>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    mobile: 0,
+    information: '',
+    guests: 0,
+    seating: 0,
+    date: '',
+  });
+
   const [allBookings, setAllBookings] = useState<IAvailable[]>([]);
   const [isNotAvailable, setIsNotAvailable] = useState<IAvailable[]>([]);
 
@@ -22,8 +31,8 @@ const Booking = () => {
     try {
       const res = await axios.get(baseUrl + '/availability', {
         params: {
-          guests: guests,
-          seating: seating,
+          guests: completeBooking.guests,
+          seating: completeBooking.seating,
         },
       });
       setAllBookings(res.data);
@@ -33,61 +42,75 @@ const Booking = () => {
   };
 
   useEffect(() => {
+    const postBooking = async () => {
+      try {
+        const res = await axios.post(baseUrl + '/add-booking', completeBooking);
+        console.log(res.data.booking);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    postBooking();
+  }, [completeBooking.information]);
+
+  useEffect(() => {
     getAvailability();
     filterDates();
-  }, [guests, seating]);
+  }, [completeBooking.guests, completeBooking.seating]);
 
   const filterDates = () => {
     const falseDates = allBookings.filter(
       (booking) => booking.isAvailable === false
     );
-    // console.log(falseDates)
     setIsNotAvailable(falseDates);
   };
   const disabledDates: any = [];
   for (let i = 0; i < isNotAvailable.length; i++) {
     disabledDates.push(isNotAvailable[i].date);
   }
-  console.log(disabledDates);
 
   const testFunction = (props: CalendarTileProperties): boolean => {
     let someDate: boolean = false;
 
     if (props.view === 'month') {
       for (let i = 0; i < disabledDates.length; i++) {
-        if (disabledDates[i].toString() === props.date.toISOString()) {
+        if (
+          disabledDates[i].toString().substring(0, 10) ===
+          props.date.toLocaleString().substring(0, 10)
+        ) {
           someDate = true;
-          console.log(props.view);
         }
       }
     }
     return someDate;
   };
 
-  // function isSameDay(a:any, b:any) {
-  //   return differenceInCalendarDays(a, b) === 0;
-  // }
-
-  // const tileDisabled = (props: CalendarTileProperties): boolean => {
-  //   const disabledDates = [];
-  //   let unAvailableDate: boolean = false;
-
-  //   if (isNotAvailable.length > 0) {
-  //     for (let i = 0; i < isNotAvailable.length; i++) {
-  //       disabledDates.push(isNotAvailable[i].date);
-  //       // console.log(isNotAvailable[i].date)
-  //     }
-  //   }
-  //   return unAvailableDate;
-  // };
+  const customerInfoHandler = (customerInfo: ICustomerInfo) => {
+    setCompleteBooking((prev) => ({
+      ...prev,
+      firstName: customerInfo.firstName,
+      lastName: customerInfo.lastName,
+      email: customerInfo.email,
+      mobile: customerInfo.mobile,
+      information: customerInfo.information,
+    }));
+  };
 
   const seatingHandler = (seatTime: number) => {
-    setSeating(seatTime);
+    setCompleteBooking((prev) => ({ ...prev, seating: seatTime }));
   };
 
   const guestHandler = (guestNumber: number) => {
-    setGuests(guestNumber);
+    setCompleteBooking((prev) => ({ ...prev, guests: guestNumber }));
   };
+
+  const dateHandler = (value: Date) => {
+    setCompleteBooking((prev) => ({
+      ...prev,
+      date: value.toLocaleString().substring(0, 10),
+    }));
+  };
+  // console.log(completeBooking.date);
   return (
     <div>
       <h2>Make a booking</h2>
@@ -95,13 +118,12 @@ const Booking = () => {
       <Guests onGuestSelect={guestHandler} />
       <div className='calendar-container'>
         <Calendar
-          onChange={setDate}
-          value={date}
+          onChange={dateHandler}
+          // value={completeBooking.date}
           minDate={new Date()}
-          // tileDisabled={({ date }) => date.getDay() === 0}
           tileDisabled={testFunction}
         />
-        <CustomerForm />
+        <CustomerForm onCustomerHandler={customerInfoHandler} />
       </div>
     </div>
   );

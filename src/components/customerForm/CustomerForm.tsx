@@ -7,6 +7,7 @@ const InitialValue: ICustomerInfo = {
   lastName: '',
   email: '',
   mobile: 0,
+  information: '',
 };
 
 const useFormFields = (InitialValue: ICustomerInfo) => {
@@ -21,17 +22,22 @@ const useFormFields = (InitialValue: ICustomerInfo) => {
   return { formFields, createChangeHandler };
 };
 
-export const CustomerForm = () => {
+interface IOnCustomerProps {
+  onCustomerHandler: (info: ICustomerInfo) => void;
+}
+
+export const CustomerForm = (props: IOnCustomerProps) => {
   const { formFields, createChangeHandler } = useFormFields({
     firstName: '',
     lastName: '',
     email: '',
     mobile: 0,
+    information: '',
   });
 
   const handelSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(formFields);
+    props.onCustomerHandler(formFields);
   };
 
   return (
@@ -65,6 +71,13 @@ export const CustomerForm = () => {
           value={formFields.mobile}
           onChange={createChangeHandler('mobile')}
           placeholder='Mobile'
+        />
+        <input
+          type='text'
+          id='info'
+          value={formFields.information}
+          onChange={createChangeHandler('information')}
+          placeholder='Info'
         />
         <button type='submit'>Book</button>
       </form>
