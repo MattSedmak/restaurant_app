@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Guests from '../../components/guests/Guests';
 import Seating from '../../components/seating/Seating';
 import axios from 'axios';
@@ -41,35 +41,44 @@ const Booking = () => {
     }
   };
 
+  const postBooking = async () => {
+    try {
+      const res = await axios.post(baseUrl + '/add-booking', completeBooking);
+      console.log(res.data.message);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const firstUpdate = useRef(true);
+
   useEffect(() => {
-    const postBooking = async () => {
-      try {
-        const res = await axios.post(baseUrl + '/add-booking', completeBooking);
-        console.log(res.data.booking);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
     postBooking();
-  }, [completeBooking.information]);
+  }, [completeBooking.mobile]);
 
   useEffect(() => {
     getAvailability();
     filterDates();
   }, [completeBooking.guests, completeBooking.seating]);
 
+  //Calendar
   const filterDates = () => {
     const falseDates = allBookings.filter(
       (booking) => booking.isAvailable === false
     );
     setIsNotAvailable(falseDates);
   };
+
   const disabledDates: any = [];
   for (let i = 0; i < isNotAvailable.length; i++) {
     disabledDates.push(isNotAvailable[i].date);
   }
 
-  const testFunction = (props: CalendarTileProperties): boolean => {
+  const tileDisabled = (props: CalendarTileProperties): boolean => {
     let someDate: boolean = false;
 
     if (props.view === 'month') {
@@ -85,6 +94,7 @@ const Booking = () => {
     return someDate;
   };
 
+  // Handlers
   const customerInfoHandler = (customerInfo: ICustomerInfo) => {
     setCompleteBooking((prev) => ({
       ...prev,
@@ -110,7 +120,7 @@ const Booking = () => {
       date: value.toLocaleString().substring(0, 10),
     }));
   };
-  // console.log(completeBooking.date);
+
   return (
     <div>
       <h2>Make a booking</h2>
@@ -121,7 +131,7 @@ const Booking = () => {
           onChange={dateHandler}
           // value={completeBooking.date}
           minDate={new Date()}
-          tileDisabled={testFunction}
+          tileDisabled={tileDisabled}
         />
         <CustomerForm onCustomerHandler={customerInfoHandler} />
       </div>
