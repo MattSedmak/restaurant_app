@@ -3,4 +3,5 @@ export interface ICustomerInfo {
   lastName: string;
   email: string;
   mobile: number;
+  information: string;
 }

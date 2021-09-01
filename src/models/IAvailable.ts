@@ -1,5 +1,5 @@
 export interface IAvailable {
-  date: Date;
+  date: string;
   tables: number;
   isAvailable: boolean;
 }
