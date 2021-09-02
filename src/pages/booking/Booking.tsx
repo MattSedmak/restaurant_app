@@ -85,7 +85,7 @@ const Booking = () => {
       for (let i = 0; i < disabledDates.length; i++) {
         if (
           disabledDates[i].toString().substring(0, 10) ===
-          props.date.toLocaleString().substring(0, 10)
+          props.date.toLocaleString('sv-SE').substring(0, 10)
         ) {
           someDate = true;
         }
@@ -132,6 +132,7 @@ const Booking = () => {
           // value={completeBooking.date}
           minDate={new Date()}
           tileDisabled={tileDisabled}
+          locale='sv-SE'
         />
         <CustomerForm onCustomerHandler={customerInfoHandler} />
       </div>
