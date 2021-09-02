@@ -7,7 +7,6 @@ import Calendar, { CalendarTileProperties } from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import CustomerForm from '../../components/customerForm/CustomerForm';
 import { ICustomerInfo } from '../../models/ICustomerInfo';
-import { IBooking } from '../../models/IBooking';
 
 const Booking = () => {
   const [completeBooking, setCompleteBooking] = useState<ICustomerInfo>({
@@ -46,7 +45,6 @@ const Booking = () => {
     try {
       const res = await axios.post(baseUrl + '/add-booking', completeBooking);
       console.log(res.data.message);
-      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -96,7 +94,8 @@ const Booking = () => {
     return someDate;
   };
 
-  // Handlers
+  // **** Handlers *****
+
   const customerInfoHandler = (customerInfo: ICustomerInfo) => {
     setCompleteBooking((prev) => ({
       ...prev,
@@ -122,7 +121,7 @@ const Booking = () => {
       date: value.toLocaleString('sv-SE').substring(0, 10),
     }));
   };
-  console.log(completeBooking);
+
   return (
     <div>
       <h2>Make a booking</h2>
@@ -131,7 +130,6 @@ const Booking = () => {
       <div className='calendar-container'>
         <Calendar
           onChange={dateHandler}
-          // value={completeBooking.date}
           minDate={new Date()}
           tileDisabled={tileDisabled}
           locale='sv-SE'
