@@ -24,8 +24,8 @@ const Booking = () => {
   const [allBookings, setAllBookings] = useState<IAvailable[]>([]);
   const [isNotAvailable, setIsNotAvailable] = useState<IAvailable[]>([]);
 
-  // const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
-  const baseUrl: string = 'http://localhost:4000';
+  const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
+  // const baseUrl: string = 'http://localhost:4000';
 
   const getAvailability = async () => {
     try {
