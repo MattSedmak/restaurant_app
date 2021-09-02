@@ -3,6 +3,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 
 import ReservationDetails from '../../components/reservationDetails/ReservationDetails';
 import { IBooking } from '../../models/IBooking';
+import { ICustomerInfo } from '../../models/ICustomerInfo';
 
 const Admin = () => {
   const [customer, setCustomer] = useState('');
@@ -26,15 +27,18 @@ const Admin = () => {
         },
       });
       setFoundBookings(res.data.bookings);
+      console.log(res.data.bookings);
     } catch (error) {
       console.log(error);
     }
   };
 
-  let foundCustomer = foundBooking.map((booking: IBooking, index) => {
+  let foundCustomer = foundBooking.map((booking: ICustomerInfo, index) => {
+    console.log(booking._id);
     return (
       <ReservationDetails
         key={index}
+        id={booking._id}
         firstName={booking.firstName}
         lastName={booking.lastName}
         email={booking.email}

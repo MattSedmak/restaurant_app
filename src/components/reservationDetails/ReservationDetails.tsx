@@ -2,6 +2,7 @@ import { useState } from 'react';
 import EditModal from '../editModal/EditModal';
 
 interface ICustomerSearchProps {
+  id: number;
   firstName: string;
   lastName: string;
   email: string;
@@ -37,7 +38,19 @@ const ReservationDetails = (props: ICustomerSearchProps) => {
         Edit
       </button>
       <br />
-      <EditModal show={showModal} hideModal={hideModalHandler} />
+      <EditModal
+        show={showModal}
+        hideModal={hideModalHandler}
+        id={props.id}
+        firstName={props.firstName}
+        lastName={props.lastName}
+        email={props.email}
+        mobile={props.mobile}
+        information={props.information}
+        guests={props.guests}
+        seating={props.seating}
+        date={props.date}
+      />
     </div>
   );
 };
