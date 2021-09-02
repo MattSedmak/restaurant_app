@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { ChangeEvent, FormEvent, useState } from 'react';
+import ReservationDetails from '../../components/reservationDetails/ReservationDetails';
+import { IBooking } from '../../models/IBooking';
 
 const Admin = () => {
   const [customer, setCustomer] = useState('');
@@ -22,12 +24,25 @@ const Admin = () => {
           lastName: customer,
         },
       });
-      setFoundBookings(res.data);
-      console.log(res.data);
+      setFoundBookings(res.data.bookings);
     } catch (error) {
       console.log(error);
     }
   };
+
+  let foundCustomer = foundBooking.map((booking: IBooking, index) => {
+    return (<ReservationDetails
+    key={index}
+    firstName = {booking.firstName} 
+    lastName = {booking.lastName}
+    email = {booking.email}
+    mobile = {booking.mobile}
+    information = {booking.information}
+    guests = {booking.guests}
+    seating = {booking.seating}
+    date = {booking.date}
+    />)
+  })
 
   return (
     <div>
@@ -43,6 +58,7 @@ const Admin = () => {
         />
         <button type='submit'>Sök</button>
       </form>
+      {foundCustomer}
     </div>
   );
 };
