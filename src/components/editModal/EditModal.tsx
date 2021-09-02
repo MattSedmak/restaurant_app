@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState, ChangeEvent, FormEvent } from 'react';
 import '../editModal/editModal.css';
 
@@ -27,6 +28,34 @@ const EditModal = (props: IShowModalProps) => {
     seating: props.seating,
     date: props.date,
   });
+
+  // **** START AXIOS ****
+  const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
+
+  const updateBooking = async () => {
+    try {
+      const res = await axios.put(
+        baseUrl + `/edit-booking/${props.id}`,
+        upDatedCustomer
+      );
+      console.log(res.data.message);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteBooking = async () => {
+    try {
+      const res = await axios.delete(baseUrl + `/delete-booking/${props.id}`);
+      console.log(res.data.message);
+      props.hideModal();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // **** END AXIOS ****
+
   const showHideClassName = props.show
     ? 'modal display-block'
     : 'modal display-none';
@@ -37,6 +66,7 @@ const EditModal = (props: IShowModalProps) => {
 
   const handelSubmit = (e: FormEvent) => {
     e.preventDefault();
+    updateBooking();
     console.log(upDatedCustomer);
   };
 
@@ -50,7 +80,7 @@ const EditModal = (props: IShowModalProps) => {
               type='radio'
               id='seating'
               checked={upDatedCustomer.seating == 18}
-              value={upDatedCustomer.seating}
+              value='18'
               onChange={changeHandler}
             />
             <label id='seating'>21</label>
@@ -58,7 +88,7 @@ const EditModal = (props: IShowModalProps) => {
               type='radio'
               id='seating'
               checked={upDatedCustomer.seating == 21}
-              value={upDatedCustomer.seating}
+              value='21'
               onChange={changeHandler}
             />
           </div>
@@ -71,7 +101,7 @@ const EditModal = (props: IShowModalProps) => {
           <input
             type='string'
             id='date'
-            value={upDatedCustomer.date}
+            value={upDatedCustomer.date.substring(0, 10)}
             onChange={changeHandler}
           />
           <input
@@ -104,15 +134,15 @@ const EditModal = (props: IShowModalProps) => {
           />
           <input
             type='text'
-            id='info'
+            id='information'
             value={upDatedCustomer.information}
             onChange={changeHandler}
             placeholder='Info'
           />
           <button type='submit'>Update</button>
         </form>
-
-        <button onClick={props.hideModal}>cancel</button>
+        <button onClick={props.hideModal}>Cancel</button>
+        <button onClick={deleteBooking}>Delete</button>
       </div>
     </div>
   );
