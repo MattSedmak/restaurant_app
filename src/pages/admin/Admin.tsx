@@ -6,7 +6,7 @@ const Admin = () => {
   const [foundBooking, setFoundBookings] = useState([]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setCustomer(e.target.value);
+    setCustomer(e.target.value.toLowerCase());
   };
 
   const handleSubmit = (e: FormEvent) => {
