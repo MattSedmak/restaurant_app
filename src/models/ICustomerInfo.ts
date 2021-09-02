@@ -1,4 +1,7 @@
-export interface ICustomerInfo {
+import { IBooking } from './IBooking';
+
+export interface ICustomerInfo extends IBooking {
+  _id: number;
   firstName: string;
   lastName: string;
   email: string;

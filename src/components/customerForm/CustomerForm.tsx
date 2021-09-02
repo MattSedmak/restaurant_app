@@ -3,11 +3,15 @@ import { useState } from 'react';
 import { ICustomerInfo } from '../../models/ICustomerInfo';
 
 const InitialValue: ICustomerInfo = {
+  _id: 0,
   firstName: '',
   lastName: '',
   email: '',
   mobile: 0,
   information: '',
+  seating: 0,
+  guests: 0,
+  date: '',
 };
 
 const useFormFields = (InitialValue: ICustomerInfo) => {
@@ -28,11 +32,15 @@ interface IOnCustomerProps {
 
 export const CustomerForm = (props: IOnCustomerProps) => {
   const { formFields, createChangeHandler } = useFormFields({
+    _id: 0,
     firstName: '',
     lastName: '',
     email: '',
     mobile: 0,
     information: '',
+    seating: 0,
+    guests: 0,
+    date: '',
   });
 
   const handelSubmit = (e: FormEvent) => {

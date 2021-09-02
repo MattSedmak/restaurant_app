@@ -10,7 +10,8 @@ import { ICustomerInfo } from '../../models/ICustomerInfo';
 import { IBooking } from '../../models/IBooking';
 
 const Booking = () => {
-  const [completeBooking, setCompleteBooking] = useState<IBooking>({
+  const [completeBooking, setCompleteBooking] = useState<ICustomerInfo>({
+    _id: 0,
     firstName: '',
     lastName: '',
     email: '',
@@ -45,6 +46,7 @@ const Booking = () => {
     try {
       const res = await axios.post(baseUrl + '/add-booking', completeBooking);
       console.log(res.data.message);
+      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -120,7 +122,7 @@ const Booking = () => {
       date: value.toLocaleString('sv-SE').substring(0, 10),
     }));
   };
-
+  console.log(completeBooking);
   return (
     <div>
       <h2>Make a booking</h2>
