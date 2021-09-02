@@ -98,8 +98,8 @@ const Booking = () => {
   const customerInfoHandler = (customerInfo: ICustomerInfo) => {
     setCompleteBooking((prev) => ({
       ...prev,
-      firstName: customerInfo.firstName,
-      lastName: customerInfo.lastName,
+      firstName: customerInfo.firstName.toLowerCase(),
+      lastName: customerInfo.lastName.toLowerCase(),
       email: customerInfo.email,
       mobile: customerInfo.mobile,
       information: customerInfo.information,
