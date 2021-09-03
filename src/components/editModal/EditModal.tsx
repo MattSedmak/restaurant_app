@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
-import { IAvailable } from '../../models/IAvailable';
 import '../editModal/editModal.css';
 
 interface IShowModalProps {
@@ -32,41 +31,28 @@ const EditModal = (props: IShowModalProps) => {
 
   // **** START AXIOS ****
   const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
+  // const baseUrl: string = 'http://localhost:4000';
 
-  const [allBookings, setAllBookings] = useState<IAvailable[]>([]);
-  const [isNotAvailable, setIsNotAvailable] = useState<IAvailable[]>([]);
+  const [resAvailable, setResAvailable] = useState(Boolean);
 
   const getAvailability = async () => {
     try {
-      const res = await axios.get(baseUrl + '/availability', {
+      const res = await axios.get(baseUrl + '/edit-admin', {
         params: {
           guests: upDatedCustomer.guests,
           seating: upDatedCustomer.seating,
+          date: upDatedCustomer.date,
         },
       });
-      console.log("Testar anrop")
-      setAllBookings(res.data);
+      setResAvailable(res.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const filterDates = () => {
-    const falseDates = allBookings.filter(
-      (booking) => booking.isAvailable === false
-    );
-    setIsNotAvailable(falseDates);
-  };
-
   useEffect(() => {
     getAvailability();
-    filterDates();
   }, [upDatedCustomer.guests, upDatedCustomer.seating, upDatedCustomer.date]);
-
-  const disabledDates: any = [];
-  for (let i = 0; i < isNotAvailable.length; i++) {
-    disabledDates.push(isNotAvailable[i].date);
-  }
 
   const updateBooking = async () => {
     try {
@@ -78,19 +64,7 @@ const EditModal = (props: IShowModalProps) => {
     } catch (error) {
       console.log(error);
     }
-  }
-
-  const checkDisabledDate = () => {
-    for (let i = 0; i < disabledDates.length; i++) {
-      if (disabledDates[i].toString().substring(0, 10) ===
-      upDatedCustomer.date.toLocaleString().substring(0, 10)) {
-        console.log("Fullbokat!")
-        return;
-      } else {
-        updateBooking();
-      }
-    }
-  }
+  };
 
   const deleteBooking = async () => {
     try {
@@ -109,15 +83,18 @@ const EditModal = (props: IShowModalProps) => {
     : 'modal display-none';
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setUpDatedCustomer((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    setUpDatedCustomer((prev) => ({
+      ...prev,
+      [e.target.id]: e.target.value,
+    }));
   };
 
   const handelSubmit = (e: FormEvent) => {
     e.preventDefault();
-    checkDisabledDate();
+    updateBooking();
     console.log(upDatedCustomer);
   };
-
+  console.log('resAvailable: ', resAvailable);
   return (
     <div className={showHideClassName}>
       <div className='modal-main'>
@@ -150,6 +127,7 @@ const EditModal = (props: IShowModalProps) => {
             type='string'
             id='date'
             value={upDatedCustomer.date.substring(0, 10)}
+            className={resAvailable ? '' : 'unavailable'}
             onChange={changeHandler}
           />
           <input
