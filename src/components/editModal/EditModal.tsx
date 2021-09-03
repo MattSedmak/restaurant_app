@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
+import { IAvailable } from '../../models/IAvailable';
 import '../editModal/editModal.css';
 
 interface IShowModalProps {
@@ -32,6 +33,41 @@ const EditModal = (props: IShowModalProps) => {
   // **** START AXIOS ****
   const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
 
+  const [allBookings, setAllBookings] = useState<IAvailable[]>([]);
+  const [isNotAvailable, setIsNotAvailable] = useState<IAvailable[]>([]);
+
+  const getAvailability = async () => {
+    try {
+      const res = await axios.get(baseUrl + '/availability', {
+        params: {
+          guests: upDatedCustomer.guests,
+          seating: upDatedCustomer.seating,
+        },
+      });
+      console.log("Testar anrop")
+      setAllBookings(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const filterDates = () => {
+    const falseDates = allBookings.filter(
+      (booking) => booking.isAvailable === false
+    );
+    setIsNotAvailable(falseDates);
+  };
+
+  useEffect(() => {
+    getAvailability();
+    filterDates();
+  }, [upDatedCustomer.guests, upDatedCustomer.seating, upDatedCustomer.date]);
+
+  const disabledDates: any = [];
+  for (let i = 0; i < isNotAvailable.length; i++) {
+    disabledDates.push(isNotAvailable[i].date);
+  }
+
   const updateBooking = async () => {
     try {
       const res = await axios.put(
@@ -42,7 +78,19 @@ const EditModal = (props: IShowModalProps) => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }
+
+  const checkDisabledDate = () => {
+    for (let i = 0; i < disabledDates.length; i++) {
+      if (disabledDates[i].toString().substring(0, 10) ===
+      upDatedCustomer.date.toLocaleString().substring(0, 10)) {
+        console.log("Fullbokat!")
+        return;
+      } else {
+        updateBooking();
+      }
+    }
+  }
 
   const deleteBooking = async () => {
     try {
@@ -66,7 +114,7 @@ const EditModal = (props: IShowModalProps) => {
 
   const handelSubmit = (e: FormEvent) => {
     e.preventDefault();
-    updateBooking();
+    checkDisabledDate();
     console.log(upDatedCustomer);
   };
 
