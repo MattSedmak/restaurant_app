@@ -7,6 +7,7 @@ import Calendar, { CalendarTileProperties } from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import CustomerForm from '../../components/customerForm/CustomerForm';
 import { ICustomerInfo } from '../../models/ICustomerInfo';
+import { CalendarContainer } from './BookingStyles';
 
 const Booking = () => {
   const [completeBooking, setCompleteBooking] = useState<ICustomerInfo>({
@@ -25,8 +26,14 @@ const Booking = () => {
   const [isNotAvailable, setIsNotAvailable] = useState<IAvailable[]>([]);
   let disabledDates: any = [];
 
-  // const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
-  const baseUrl: string = 'http://localhost:4000';
+
+  const [showGuests, setShowGuests] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+
+  const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
+  // const baseUrl: string = 'http://localhost:4000';
+
 
   const getAvailability = async () => {
     try {
@@ -115,10 +122,12 @@ const Booking = () => {
 
   const seatingHandler = (seatTime: number) => {
     setCompleteBooking((prev) => ({ ...prev, seating: seatTime }));
+    setShowGuests(true);
   };
 
   const guestHandler = (guestNumber: number) => {
     setCompleteBooking((prev) => ({ ...prev, guests: guestNumber }));
+    setShowCalendar(true);
   };
 
   const dateHandler = (value: Date) => {
@@ -126,22 +135,28 @@ const Booking = () => {
       ...prev,
       date: value.toLocaleString('sv-SE').substring(0, 10),
     }));
+    setShowForm(true);
   };
 
   return (
     <div>
       <h2>Make a booking</h2>
       <Seating onSeatTime={seatingHandler} />
-      <Guests onGuestSelect={guestHandler} />
-      <div className='calendar-container'>
-        <Calendar
-          onChange={dateHandler}
-          minDate={new Date()}
-          tileDisabled={tileDisabled}
-          locale='sv-SE'
-        />
-        <CustomerForm onCustomerHandler={customerInfoHandler} />
-      </div>
+      {showGuests && <Guests onGuestSelect={guestHandler} />}
+
+      {showCalendar && (
+        <CalendarContainer>
+          <h4>Vilken dag vill ni komma?</h4>
+          <Calendar
+            onChange={dateHandler}
+            minDate={new Date()}
+            tileDisabled={tileDisabled}
+            locale='sv-SE'
+          />
+        </CalendarContainer>
+      )}
+
+      {showForm && <CustomerForm onCustomerHandler={customerInfoHandler} />}
     </div>
   );
 };
