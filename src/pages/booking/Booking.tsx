@@ -23,7 +23,10 @@ const Booking = () => {
 
   const [allBookings, setAllBookings] = useState<IAvailable[]>([]);
   const [isNotAvailable, setIsNotAvailable] = useState<IAvailable[]>([]);
+
+  const [showGuests, setShowGuests] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
+
   const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
   // const baseUrl: string = 'http://localhost:4000';
 
@@ -109,6 +112,7 @@ const Booking = () => {
 
   const seatingHandler = (seatTime: number) => {
     setCompleteBooking((prev) => ({ ...prev, seating: seatTime }));
+    setShowGuests(true);
   };
 
   const guestHandler = (guestNumber: number) => {
@@ -123,15 +127,11 @@ const Booking = () => {
     }));
   };
 
-  const showCalendarHandler = () => {
-    // setShowCalendar(true);
-  };
-
   return (
     <div>
       <h2>Make a booking</h2>
       <Seating onSeatTime={seatingHandler} />
-      <Guests onGuestSelect={guestHandler} />
+      {showGuests && <Guests onGuestSelect={guestHandler} />}
       <div className='calendar-container'>
         {showCalendar && (
           <Calendar
