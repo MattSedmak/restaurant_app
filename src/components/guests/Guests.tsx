@@ -1,11 +1,11 @@
-import { GuestNumber } from './GuestStyles';
+import { Container, GuestNumber } from './GuestStyles';
 interface IGuestNumberProps {
   onGuestSelect: (guest: number) => void;
 }
 
 const Guests = (props: IGuestNumberProps) => {
   return (
-    <div>
+    <Container>
       <GuestNumber
         onClick={() => {
           props.onGuestSelect(1);
@@ -90,7 +90,7 @@ const Guests = (props: IGuestNumberProps) => {
       >
         12
       </GuestNumber>
-    </div>
+    </Container>
   );
 };
 export default Guests;
