@@ -2,6 +2,7 @@ import { useState } from 'react';
 import EditModal from '../editModal/EditModal';
 
 interface ICustomerSearchProps {
+  updatePage: () => void;
   id: number;
   firstName: string;
   lastName: string;
@@ -26,19 +27,20 @@ const ReservationDetails = (props: ICustomerSearchProps) => {
 
   return (
     <div>
-      <div>{props.firstName}</div>
-      <div>{props.lastName}</div>
-      <div>{props.email}</div>
-      <div>{props.mobile}</div>
-      <div>{props.information}</div>
-      <div>{props.guests}</div>
-      <div>{props.seating}</div>
-      <div>{props.date.substring(0, 10)}</div>
+      <div>Förnamn: <strong>{props.firstName}</strong></div>
+      <div>Efternamn: <strong>{props.lastName}</strong></div>
+      <div>Email: <strong>{props.email}</strong></div>
+      <div>Telefon: <strong>{props.mobile}</strong></div>
+      <div>Meddelande: <strong>{props.information}</strong></div>
+      <div>Antal gäster: <strong>{props.guests}</strong></div>
+      <div>Tid för sittning: <strong>{props.seating}</strong></div>
+      <div>Bokat datum: <strong>{props.date.substring(0, 10)}</strong></div>
       <button type='button' onClick={showModalHandler}>
         Edit
       </button>
       <br />
       <EditModal
+        updatePage={props.updatePage}
         show={showModal}
         hideModal={hideModalHandler}
         id={props.id}

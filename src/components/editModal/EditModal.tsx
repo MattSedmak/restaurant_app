@@ -1,8 +1,9 @@
 import axios from 'axios';
-import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
+import { useState, ChangeEvent, FormEvent, useEffect, useRef } from 'react';
 import '../editModal/editModal.css';
 
 interface IShowModalProps {
+  updatePage: () => void;
   show: boolean;
   hideModal: () => void;
   id: number;
@@ -60,6 +61,8 @@ const EditModal = (props: IShowModalProps) => {
         baseUrl + `/edit-booking/${props.id}`,
         upDatedCustomer
       );
+      props.updatePage();
+      props.hideModal();
       console.log(res.data.message);
     } catch (error) {
       console.log(error);
@@ -69,20 +72,25 @@ const EditModal = (props: IShowModalProps) => {
   const deleteBooking = async () => {
     try {
       const res = await axios.delete(baseUrl + `/delete-booking/${props.id}`);
-      console.log(res.data.message);
+      props.updatePage();
       props.hideModal();
+      console.log(res.data.message);  
     } catch (error) {
       console.log(error);
     }
   };
 
   // **** END AXIOS ****
+  const cancelUpdate = () => {
+    props.updatePage();
+    props.hideModal();
+  }
 
   const showHideClassName = props.show
     ? 'modal display-block'
     : 'modal display-none';
 
-  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const changeHandler = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
     setUpDatedCustomer((prev) => ({
       ...prev,
       [e.target.id]: e.target.value,
@@ -158,8 +166,7 @@ const EditModal = (props: IShowModalProps) => {
             onChange={changeHandler}
             placeholder='Mobile'
           />
-          <input
-            type='text'
+          <textarea
             id='information'
             value={upDatedCustomer.information}
             onChange={changeHandler}
@@ -167,7 +174,7 @@ const EditModal = (props: IShowModalProps) => {
           />
           <button type='submit'>Update</button>
         </form>
-        <button onClick={props.hideModal}>Cancel</button>
+        <button onClick={cancelUpdate}>Cancel</button>
         <button onClick={deleteBooking}>Delete</button>
       </div>
     </div>
