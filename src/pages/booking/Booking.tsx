@@ -23,9 +23,10 @@ const Booking = () => {
 
   const [allBookings, setAllBookings] = useState<IAvailable[]>([]);
   const [isNotAvailable, setIsNotAvailable] = useState<IAvailable[]>([]);
+  let disabledDates: any = [];
 
-  const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
-  // const baseUrl: string = 'http://localhost:4000';
+  // const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
+  const baseUrl: string = 'http://localhost:4000';
 
   const getAvailability = async () => {
     try {
@@ -35,11 +36,31 @@ const Booking = () => {
           seating: completeBooking.seating,
         },
       });
+
       setAllBookings(res.data);
     } catch (error) {
       console.log(error);
     }
   };
+  console.log(allBookings);
+
+  useEffect(() => {
+    filterDates();
+  }, [allBookings]);
+
+  const filterDates = () => {
+    let falseDates = allBookings.filter(
+      (booking) => booking.isAvailable === false
+    );
+    setIsNotAvailable(falseDates);
+  };
+  console.log(isNotAvailable);
+
+  for (let i = 0; i < isNotAvailable.length; i++) {
+    let fullDate = isNotAvailable[i].date;
+    disabledDates.push(fullDate);
+  }
+  console.log('disabledDates: ' + disabledDates);
 
   const postBooking = async () => {
     try {
@@ -65,19 +86,6 @@ const Booking = () => {
     filterDates();
   }, [completeBooking.guests, completeBooking.seating]);
 
-  //Calendar
-  const filterDates = () => {
-    const falseDates = allBookings.filter(
-      (booking) => booking.isAvailable === false
-    );
-    setIsNotAvailable(falseDates);
-  };
-
-  const disabledDates: any = [];
-  for (let i = 0; i < isNotAvailable.length; i++) {
-    disabledDates.push(isNotAvailable[i].date);
-  }
-
   const tileDisabled = (props: CalendarTileProperties): boolean => {
     let someDate: boolean = false;
 
@@ -93,8 +101,6 @@ const Booking = () => {
     }
     return someDate;
   };
-
-  // **** Handlers *****
 
   const customerInfoHandler = (customerInfo: ICustomerInfo) => {
     setCompleteBooking((prev) => ({
