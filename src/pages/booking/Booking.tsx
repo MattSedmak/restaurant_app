@@ -138,7 +138,7 @@ const Booking = () => {
 
       {showCalendar && (
         <CalendarContainer>
-          <h4>What day would you like to eat?</h4>
+          <h4>Vilken dag vill ni komma?</h4>
           <Calendar
             onChange={dateHandler}
             minDate={new Date()}

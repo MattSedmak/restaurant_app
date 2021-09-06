@@ -6,8 +6,8 @@ interface IGuestNumberProps {
 const Guests = (props: IGuestNumberProps) => {
   return (
     <Container>
-      <h4>How many seats will you need?</h4>
-      <p>Please contact the restaurant for bookings over 12 persons.</p>
+      <h4>Hur många stolar behöver ni?</h4>
+      <p>Vänligen kontakta restaurangen om nill vill boka fler än 12 personer.</p>
       <GuestNumberWrapper>
         <GuestNumber
           onClick={() => {

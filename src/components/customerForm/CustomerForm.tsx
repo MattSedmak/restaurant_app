@@ -1,6 +1,14 @@
 import React, { ChangeEvent, FormEvent } from 'react';
 import { useState } from 'react';
 import { ICustomerInfo } from '../../models/ICustomerInfo';
+import {
+  Button,
+  FormContainer,
+  Information,
+  Input,
+  StyledForm,
+  StyledLabel,
+} from './CustomerFormStyles';
 
 const InitialValue: ICustomerInfo = {
   _id: 0,
@@ -18,7 +26,8 @@ const useFormFields = (InitialValue: ICustomerInfo) => {
   const [formFields, setFormFields] = useState<ICustomerInfo>(InitialValue);
 
   const createChangeHandler =
-    (key: keyof ICustomerInfo) => (e: ChangeEvent<HTMLInputElement>) => {
+    (key: keyof ICustomerInfo) =>
+    (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
       const value = e.target.value;
       setFormFields((prev: ICustomerInfo) => ({ ...prev, [key]: value }));
     };
@@ -49,47 +58,49 @@ export const CustomerForm = (props: IOnCustomerProps) => {
   };
 
   return (
-    <div>
-      <h1>Customer Form</h1>
-      <form onSubmit={handelSubmit}>
-        <input
+    <FormContainer>
+      <h4>Vi behöver dina kontaktuppgifter</h4>
+      <StyledForm onSubmit={handelSubmit}>
+        <Input
           type='text'
           id='firstName'
           value={formFields.firstName}
           onChange={createChangeHandler('firstName')}
-          placeholder='First name'
+          placeholder='Förnamn'
         />
-        <input
+
+        <Input
           type='text'
           id='lastName'
           value={formFields.lastName}
           onChange={createChangeHandler('lastName')}
-          placeholder='Last name'
+          placeholder='Efternamn'
         />
-        <input
+        <Input
           type='email'
           id='email'
           value={formFields.email}
           onChange={createChangeHandler('email')}
-          placeholder='Email'
+          placeholder='E-post'
         />
-        <input
+        <Input
           type='tel'
           id='mobile'
           value={formFields.mobile}
           onChange={createChangeHandler('mobile')}
-          placeholder='Mobile'
+          pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
+          placeholder='070-000-0000'
         />
-        <input
-          type='text'
+        <Information
           id='info'
           value={formFields.information}
           onChange={createChangeHandler('information')}
-          placeholder='Info'
+          placeholder='Meddelande...'
+          rows={2}
         />
-        <button type='submit'>Book</button>
-      </form>
-    </div>
+        <Button type='submit'>Boka</Button>
+      </StyledForm>
+    </FormContainer>
   );
 };
 
