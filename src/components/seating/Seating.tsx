@@ -1,4 +1,4 @@
-import { SeatingButton } from './SeatingStyles';
+import { Container, SeatingButton } from './SeatingStyles';
 
 interface IOnSeatTimeProps {
   onSeatTime: (seating: number) => void;
@@ -6,22 +6,23 @@ interface IOnSeatTimeProps {
 
 const Seating = (props: IOnSeatTimeProps) => {
   return (
-    <div>
+    <Container>
+      <h4>Choose your preferred seating time</h4>
       <SeatingButton
         onClick={() => {
           props.onSeatTime(18);
         }}
       >
-        18-20:30
+        18:00 - 20:30
       </SeatingButton>
       <SeatingButton
         onClick={() => {
           props.onSeatTime(21);
         }}
       >
-        21-23:30
+        21:00 - 23:30
       </SeatingButton>
-    </div>
+    </Container>
   );
 };
 export default Seating;

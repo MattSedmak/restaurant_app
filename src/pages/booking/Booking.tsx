@@ -7,6 +7,7 @@ import Calendar, { CalendarTileProperties } from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import CustomerForm from '../../components/customerForm/CustomerForm';
 import { ICustomerInfo } from '../../models/ICustomerInfo';
+import { CalendarContainer } from './BookingStyles';
 
 const Booking = () => {
   const [completeBooking, setCompleteBooking] = useState<ICustomerInfo>({
@@ -134,17 +135,20 @@ const Booking = () => {
       <h2>Make a booking</h2>
       <Seating onSeatTime={seatingHandler} />
       {showGuests && <Guests onGuestSelect={guestHandler} />}
-      <div className='calendar-container'>
-        {showCalendar && (
+
+      {showCalendar && (
+        <CalendarContainer>
+          <h4>What day would you like to eat?</h4>
           <Calendar
             onChange={dateHandler}
             minDate={new Date()}
             tileDisabled={tileDisabled}
             locale='sv-SE'
           />
-        )}
-        {showForm && <CustomerForm onCustomerHandler={customerInfoHandler} />}
-      </div>
+        </CalendarContainer>
+      )}
+
+      {showForm && <CustomerForm onCustomerHandler={customerInfoHandler} />}
     </div>
   );
 };
