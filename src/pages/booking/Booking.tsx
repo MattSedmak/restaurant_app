@@ -26,6 +26,7 @@ const Booking = () => {
 
   const [showGuests, setShowGuests] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
   const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
   // const baseUrl: string = 'http://localhost:4000';
@@ -125,6 +126,7 @@ const Booking = () => {
       ...prev,
       date: value.toLocaleString('sv-SE').substring(0, 10),
     }));
+    setShowForm(true);
   };
 
   return (
@@ -141,7 +143,7 @@ const Booking = () => {
             locale='sv-SE'
           />
         )}
-        <CustomerForm onCustomerHandler={customerInfoHandler} />
+        {showForm && <CustomerForm onCustomerHandler={customerInfoHandler} />}
       </div>
     </div>
   );
