@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 
 import ReservationDetails from '../../components/reservationDetails/ReservationDetails';
 import { ICustomerInfo } from '../../models/ICustomerInfo';
@@ -31,9 +31,14 @@ const Admin = () => {
     }
   };
 
+  const updatePage = () => {
+    getCustomer();
+  }
+
   let foundCustomer = foundBooking.map((booking: ICustomerInfo, index) => {
     return (
       <ReservationDetails
+        updatePage={updatePage}
         key={index}
         id={booking._id}
         firstName={booking.firstName}
