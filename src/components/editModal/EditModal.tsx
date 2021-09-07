@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { useState, ChangeEvent, FormEvent, useEffect, useRef } from 'react';
+import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import '../editModal/editModal.css';
+import { ActionButton, ButtonDiv, Inputs, ModalForm, ModalMain } from '../editModal/EditModalStyle';
 
 interface IShowModalProps {
   updatePage: () => void;
@@ -103,19 +104,18 @@ const EditModal = (props: IShowModalProps) => {
   const handelSubmit = (e: FormEvent) => {
     e.preventDefault();
     updateBooking();
-    console.log(upDatedCustomer);
   };
-  console.log('resAvailable: ', resAvailable);
+
   return (
     <div className={showHideClassName}>
-      <div className='modal-main'>
-        <form onSubmit={handelSubmit}>
+      <ModalMain>
+        <ModalForm onSubmit={handelSubmit}>
           <div>
             <label id='seating'>18</label>
             <input
               type='radio'
               id='seating'
-              checked={upDatedCustomer.seating == 18}
+              checked={upDatedCustomer.seating === 18}
               value='18'
               onChange={changeHandler}
             />
@@ -123,46 +123,46 @@ const EditModal = (props: IShowModalProps) => {
             <input
               type='radio'
               id='seating'
-              checked={upDatedCustomer.seating == 21}
+              checked={upDatedCustomer.seating === 21}
               value='21'
               onChange={changeHandler}
             />
           </div>
-          <input
+          <Inputs
             type='number'
             id='guests'
             value={upDatedCustomer.guests}
             onChange={changeHandler}
           />
-          <input
+          <Inputs
             type='string'
             id='date'
             value={upDatedCustomer.date.substring(0, 10)}
             className={resAvailable ? '' : 'unavailable'}
             onChange={changeHandler}
           />
-          <input
+          <Inputs
             type='text'
             id='firstName'
             value={upDatedCustomer.firstName}
             onChange={changeHandler}
             placeholder=''
           />
-          <input
+          <Inputs
             type='text'
             id='lastName'
             value={upDatedCustomer.lastName}
             onChange={changeHandler}
             placeholder='Last name'
           />
-          <input
+          <Inputs
             type='email'
             id='email'
             value={upDatedCustomer.email}
             onChange={changeHandler}
             placeholder='Email'
           />
-          <input
+          <Inputs
             type='tel'
             id='mobile'
             value={upDatedCustomer.mobile}
@@ -175,11 +175,13 @@ const EditModal = (props: IShowModalProps) => {
             onChange={changeHandler}
             placeholder='Info'
           />
-          <button type='submit'>Update</button>
-        </form>
-        <button onClick={cancelUpdate}>Cancel</button>
-        <button onClick={deleteBooking}>Delete</button>
-      </div>
+          <ActionButton type='submit'>Update</ActionButton>
+        </ModalForm>
+        <ButtonDiv>
+        <ActionButton onClick={cancelUpdate}>Cancel</ActionButton>
+        <ActionButton onClick={deleteBooking}>Delete</ActionButton>
+        </ButtonDiv>
+      </ModalMain>
     </div>
   );
 };

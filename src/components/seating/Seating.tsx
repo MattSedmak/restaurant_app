@@ -7,7 +7,19 @@ interface IOnSeatTimeProps {
 }
 
 const Seating = (props: IOnSeatTimeProps) => {
-  const [primary, setPrimary] = useState(false);
+  const [firstSeating, setFirstSeating] = useState(false);
+  const [secSeating, setSecSeating] = useState(false);
+  // const [firstSeating, setFirstSeating] = useState(false);
+
+  const onFirstSeating = () => {
+    setFirstSeating(!firstSeating);
+    setSecSeating(false);
+  };
+
+  const onSecSeating = () => {
+    setSecSeating(!secSeating);
+    setFirstSeating(false);
+  };
 
   return (
     <Container>
@@ -15,17 +27,18 @@ const Seating = (props: IOnSeatTimeProps) => {
       <SeatingButton
         onClick={() => {
           props.onSeatTime(18);
-          setPrimary(true);
+          onFirstSeating();
         }}
-        primary={primary}
+        selected={firstSeating}
       >
         18:00 - 20:30
       </SeatingButton>
       <SeatingButton
         onClick={() => {
           props.onSeatTime(21);
+          onSecSeating();
         }}
-        primary={primary}
+        selected={secSeating}
       >
         21:00 - 23:30
       </SeatingButton>
