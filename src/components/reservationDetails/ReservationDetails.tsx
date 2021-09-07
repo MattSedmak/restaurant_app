@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import EditModal from '../editModal/EditModal';
+import { EditButton, ReservationContainer, CustomerName } from './ReservationDetailsStyle';
 
 interface ICustomerSearchProps {
   updatePage: () => void;
@@ -24,22 +25,22 @@ const ReservationDetails = (props: ICustomerSearchProps) => {
   const hideModalHandler = () => {
     setShowModal(false);
   };
-
+  
   return (
     <div>
-      <div>Förnamn: <strong>{props.firstName}</strong></div>
-      <div>Efternamn: <strong>{props.lastName}</strong></div>
-      <div>Email: <strong>{props.email}</strong></div>
-      <div>Telefon: <strong>{props.mobile}</strong></div>
-      <div>Meddelande: <strong>{props.information}</strong></div>
-      <div>Antal gäster: <strong>{props.guests}</strong></div>
-      <div>Tid för sittning: <strong>{props.seating}</strong></div>
-      <div>Bokat datum: <strong>{props.date.substring(0, 10)}</strong></div>
-      <button type='button' onClick={showModalHandler}>
-        Edit
-      </button>
-      <br />
-      <EditModal
+
+      <ReservationContainer>
+        <CustomerName>Förnamn: <strong>{props.firstName}</strong></CustomerName>
+        <CustomerName>Efternamn: <strong>{props.lastName}</strong></CustomerName>
+        <div>Email: <strong>{props.email}</strong></div>
+        <div>Telefon: <strong>{props.mobile}</strong></div>
+        <div>Meddelande: <strong>{props.information}</strong></div>
+        <div>Antal gäster: <strong>{props.guests}</strong></div>
+        <div>Tid för sittning: <strong>{props.seating}</strong></div>
+        <div>Bokat datum: <strong>{props.date.substring(0, 10)}</strong></div>
+        <EditButton type='button' onClick={showModalHandler}>Edit</EditButton>
+      </ReservationContainer>
+      {showModal && <EditModal
         updatePage={props.updatePage}
         show={showModal}
         hideModal={hideModalHandler}
@@ -51,9 +52,11 @@ const ReservationDetails = (props: ICustomerSearchProps) => {
         information={props.information}
         guests={props.guests}
         seating={props.seating}
-        date={props.date}
-      />
+        date={props.date} 
+      />}
+
     </div>
+      
   );
 };
 export default ReservationDetails;

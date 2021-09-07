@@ -7,7 +7,10 @@ import Calendar, { CalendarTileProperties } from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import CustomerForm from '../../components/customerForm/CustomerForm';
 import { ICustomerInfo } from '../../models/ICustomerInfo';
-import { CalendarContainer } from './BookingStyles';
+import { BookingContainer, CalendarContainer } from './BookingStyles';
+import { Redirect } from 'react-router-dom';
+
+import Confirmation from '../confirmation/Confirmation';
 
 const Booking = () => {
   const [completeBooking, setCompleteBooking] = useState<ICustomerInfo>({
@@ -29,9 +32,12 @@ const Booking = () => {
   const [showGuests, setShowGuests] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [redirect, setRedirect] = useState(false);
 
-  // const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
-  const baseUrl: string = 'http://localhost:4000';
+
+  const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
+  // const baseUrl: string = 'http://localhost:4000';
+
 
   const getAvailability = async () => {
     try {
@@ -54,9 +60,7 @@ const Booking = () => {
   }, [allBookings]);
 
   const filterDates = () => {
-    let falseDates = allBookings.filter(
-      (booking) => booking.isAvailable === false
-    );
+    let falseDates = allBookings.filter((booking) => booking.isAvailable === false);
     setIsNotAvailable(falseDates);
   };
   console.log(isNotAvailable);
@@ -116,6 +120,7 @@ const Booking = () => {
       mobile: customerInfo.mobile,
       information: customerInfo.information,
     }));
+    setRedirect(true);
   };
 
   const seatingHandler = (seatTime: number) => {
@@ -137,8 +142,11 @@ const Booking = () => {
   };
 
   return (
-    <div>
-      <h2>Make a booking</h2>
+    <BookingContainer>
+      {redirect && (
+        <Redirect to={{ pathname: '/confirmation', state: completeBooking }} />
+      )}
+      <h1>The 3 Dude's</h1>
       <Seating onSeatTime={seatingHandler} />
       {showGuests && <Guests onGuestSelect={guestHandler} />}
 
@@ -155,7 +163,7 @@ const Booking = () => {
       )}
 
       {showForm && <CustomerForm onCustomerHandler={customerInfoHandler} />}
-    </div>
+    </BookingContainer>
   );
 };
 

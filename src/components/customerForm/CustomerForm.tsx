@@ -1,6 +1,7 @@
-import React, { ChangeEvent, FormEvent } from 'react';
+import React, { ChangeEvent, FormEvent, useCallback } from 'react';
 import { useState } from 'react';
 import { ICustomerInfo } from '../../models/ICustomerInfo';
+
 import {
   Button,
   FormContainer,
@@ -61,42 +62,53 @@ export const CustomerForm = (props: IOnCustomerProps) => {
     <FormContainer>
       <h4>Vi behöver dina kontaktuppgifter</h4>
       <StyledForm onSubmit={handelSubmit}>
+        <StyledLabel>Förrnamn:</StyledLabel>
         <Input
           type='text'
           id='firstName'
           value={formFields.firstName}
           onChange={createChangeHandler('firstName')}
-          placeholder='Förnamn'
+          placeholder='Ditt Förrnamn'
+          required
         />
-
+        <StyledLabel>Efternamn:</StyledLabel>
         <Input
           type='text'
           id='lastName'
           value={formFields.lastName}
           onChange={createChangeHandler('lastName')}
-          placeholder='Efternamn'
+          placeholder='Ditt Efternamn'
+          required
         />
+        <StyledLabel>E-post:</StyledLabel>
         <Input
           type='email'
           id='email'
           value={formFields.email}
           onChange={createChangeHandler('email')}
           placeholder='E-post'
+          required
         />
+        <StyledLabel>Telefon:</StyledLabel>
         <Input
           type='tel'
           id='mobile'
           value={formFields.mobile}
           onChange={createChangeHandler('mobile')}
-          //pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
-          placeholder='070-000-0000'
+
+          pattern='[0-9]{10}'
+          placeholder='0712345678'
+          required
+
+
         />
+        <StyledLabel>Meddelande:</StyledLabel>
         <Information
           id='info'
           value={formFields.information}
           onChange={createChangeHandler('information')}
-          placeholder='Meddelande...'
-          rows={2}
+          placeholder='Ditt Meddelande här...'
+          rows={3}
         />
         <Button type='submit'>Boka</Button>
       </StyledForm>
