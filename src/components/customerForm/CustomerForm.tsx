@@ -61,21 +61,23 @@ export const CustomerForm = (props: IOnCustomerProps) => {
     <FormContainer>
       <h4>Vi behöver dina kontaktuppgifter</h4>
       <StyledForm onSubmit={handelSubmit}>
+        <StyledLabel>Förrnamn:</StyledLabel>
         <Input
           type='text'
           id='firstName'
           value={formFields.firstName}
           onChange={createChangeHandler('firstName')}
-          placeholder='Förnamn'
+          placeholder='Ditt Förrnamn'
         />
-
+        <StyledLabel>Efternamn:</StyledLabel>
         <Input
           type='text'
           id='lastName'
           value={formFields.lastName}
           onChange={createChangeHandler('lastName')}
-          placeholder='Efternamn'
+          placeholder='Ditt Efternamn'
         />
+        <StyledLabel>E-post:</StyledLabel>
         <Input
           type='email'
           id='email'
@@ -83,6 +85,7 @@ export const CustomerForm = (props: IOnCustomerProps) => {
           onChange={createChangeHandler('email')}
           placeholder='E-post'
         />
+        <StyledLabel>Telefon:</StyledLabel>
         <Input
           type='tel'
           id='mobile'
@@ -91,12 +94,13 @@ export const CustomerForm = (props: IOnCustomerProps) => {
           pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
           placeholder='070-000-0000'
         />
+        <StyledLabel>Meddelande:</StyledLabel>
         <Information
           id='info'
           value={formFields.information}
           onChange={createChangeHandler('information')}
-          placeholder='Meddelande...'
-          rows={2}
+          placeholder='Ditt Meddelande här...'
+          rows={3}
         />
         <Button type='submit'>Boka</Button>
       </StyledForm>

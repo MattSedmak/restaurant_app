@@ -9,7 +9,7 @@ export const Container = styled.div`
 `;
 
 interface IcolorProps {
-  primary: boolean;
+  selected: boolean;
 }
 
 export const SeatingButton = styled.div`
@@ -17,7 +17,7 @@ export const SeatingButton = styled.div`
   margin: 1em auto;
   padding: 1em;
   text-align: center;
-  background-color: ${(props: IcolorProps) => (props.primary ? '#000' : 'fff')};
-  color: ${(props: IcolorProps) => (props.primary ? '#fff' : '000')};
+  background-color: ${(props: IcolorProps) => (props.selected ? '#333' : 'fff')};
+  color: ${(props: IcolorProps) => (props.selected ? '#fff' : '000')};
   cursor: pointer;
 `;
