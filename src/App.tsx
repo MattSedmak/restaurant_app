@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Admin from './pages/admin/Admin';
 import Booking from './pages/booking/Booking';
+import Confirmation from './pages/confirmation/Confirmation';
 import { Start } from './pages/start/Start';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path='/admin'>
           <Admin />
         </Route>
+        <Route path='/confirmation' component={Confirmation} />
       </Switch>
     </Router>
   );

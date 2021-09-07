@@ -8,6 +8,9 @@ import 'react-calendar/dist/Calendar.css';
 import CustomerForm from '../../components/customerForm/CustomerForm';
 import { ICustomerInfo } from '../../models/ICustomerInfo';
 import { BookingContainer, CalendarContainer } from './BookingStyles';
+import { Redirect } from 'react-router-dom';
+
+import Confirmation from '../confirmation/Confirmation';
 
 const Booking = () => {
   const [completeBooking, setCompleteBooking] = useState<ICustomerInfo>({
@@ -29,6 +32,7 @@ const Booking = () => {
   const [showGuests, setShowGuests] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [redirect, setRedirect] = useState(false);
 
   const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
   // const baseUrl: string = 'http://localhost:4000';
@@ -114,6 +118,7 @@ const Booking = () => {
       mobile: customerInfo.mobile,
       information: customerInfo.information,
     }));
+    setRedirect(true);
   };
 
   const seatingHandler = (seatTime: number) => {
@@ -136,6 +141,9 @@ const Booking = () => {
 
   return (
     <BookingContainer>
+      {redirect && (
+        <Redirect to={{ pathname: '/confirmation', state: completeBooking }} />
+      )}
       <h1>The 3 Dude's</h1>
       <Seating onSeatTime={seatingHandler} />
       {showGuests && <Guests onGuestSelect={guestHandler} />}
