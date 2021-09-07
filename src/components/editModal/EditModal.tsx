@@ -44,6 +44,7 @@ const EditModal = (props: IShowModalProps) => {
           guests: upDatedCustomer.guests,
           seating: upDatedCustomer.seating,
           date: upDatedCustomer.date,
+          id: upDatedCustomer._id,
         },
       });
       setResAvailable(res.data);
@@ -75,7 +76,7 @@ const EditModal = (props: IShowModalProps) => {
       const res = await axios.delete(baseUrl + `/delete-booking/${props.id}`);
       props.updatePage();
       props.hideModal();
-      console.log(res.data.message);  
+      console.log(res.data.message);
     } catch (error) {
       console.log(error);
     }
@@ -85,13 +86,15 @@ const EditModal = (props: IShowModalProps) => {
   const cancelUpdate = () => {
     props.updatePage();
     props.hideModal();
-  }
+  };
 
   const showHideClassName = props.show
     ? 'modal display-block'
     : 'modal display-none';
 
-  const changeHandler = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
+  const changeHandler = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => {
     setUpDatedCustomer((prev) => ({
       ...prev,
       [e.target.id]: e.target.value,

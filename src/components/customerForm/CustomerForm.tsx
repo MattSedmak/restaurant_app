@@ -26,12 +26,12 @@ const InitialValue: ICustomerInfo = {
 const useFormFields = (InitialValue: ICustomerInfo) => {
   const [formFields, setFormFields] = useState<ICustomerInfo>(InitialValue);
 
-  const createChangeHandler =
-    (key: keyof ICustomerInfo) =>
-    (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
-      const value = e.target.value;
-      setFormFields((prev: ICustomerInfo) => ({ ...prev, [key]: value }));
-    };
+  const createChangeHandler = (key: keyof ICustomerInfo) => (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const value = e.target.value;
+    setFormFields((prev: ICustomerInfo) => ({ ...prev, [key]: value }));
+  };
 
   return { formFields, createChangeHandler };
 };
@@ -95,9 +95,11 @@ export const CustomerForm = (props: IOnCustomerProps) => {
           id='mobile'
           value={formFields.mobile}
           onChange={createChangeHandler('mobile')}
+
           pattern='[0-9]{10}'
           placeholder='0712345678'
           required
+
         />
         <StyledLabel>Meddelande:</StyledLabel>
         <Information

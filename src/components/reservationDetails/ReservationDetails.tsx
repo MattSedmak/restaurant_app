@@ -28,6 +28,7 @@ const ReservationDetails = (props: ICustomerSearchProps) => {
   
   return (
     <div>
+
       <ReservationContainer>
         <CustomerName>Förnamn: <strong>{props.firstName}</strong></CustomerName>
         <CustomerName>Efternamn: <strong>{props.lastName}</strong></CustomerName>
@@ -53,6 +54,7 @@ const ReservationDetails = (props: ICustomerSearchProps) => {
         seating={props.seating}
         date={props.date} 
       />}
+
     </div>
       
   );
