@@ -12,6 +12,14 @@ export const FormContainer = styled.div`
   background-color: #f7f7f7;
 `;
 
+export const Input = styled.input`
+  border: 1px solid black;
+  margin-bottom: 2.5em;
+  padding: 0.7em;
+  width: 70%;
+  border-radius: 3px;
+`;
+
 export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -26,14 +34,6 @@ export const StyledLabel = styled.label`
   width: 70%;
   display: flex;
   align-items: flex-start;
-`;
-
-export const Input = styled.input`
-  border: 1px solid black;
-  margin-bottom: 2.5em;
-  padding: 0.7em;
-  width: 70%;
-  border-radius: 3px;
 `;
 
 export const Information = styled.textarea`

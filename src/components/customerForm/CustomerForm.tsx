@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent } from 'react';
+import React, { ChangeEvent, FormEvent, useCallback } from 'react';
 import { useState } from 'react';
 import { ICustomerInfo } from '../../models/ICustomerInfo';
 import {
@@ -68,6 +68,7 @@ export const CustomerForm = (props: IOnCustomerProps) => {
           value={formFields.firstName}
           onChange={createChangeHandler('firstName')}
           placeholder='Ditt Förrnamn'
+          required
         />
         <StyledLabel>Efternamn:</StyledLabel>
         <Input
@@ -76,6 +77,7 @@ export const CustomerForm = (props: IOnCustomerProps) => {
           value={formFields.lastName}
           onChange={createChangeHandler('lastName')}
           placeholder='Ditt Efternamn'
+          required
         />
         <StyledLabel>E-post:</StyledLabel>
         <Input
@@ -84,6 +86,7 @@ export const CustomerForm = (props: IOnCustomerProps) => {
           value={formFields.email}
           onChange={createChangeHandler('email')}
           placeholder='E-post'
+          required
         />
         <StyledLabel>Telefon:</StyledLabel>
         <Input
@@ -91,8 +94,9 @@ export const CustomerForm = (props: IOnCustomerProps) => {
           id='mobile'
           value={formFields.mobile}
           onChange={createChangeHandler('mobile')}
-          pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
-          placeholder='070-000-0000'
+          pattern='[0-9]{10}'
+          placeholder='0712345678'
+          required
         />
         <StyledLabel>Meddelande:</StyledLabel>
         <Information
