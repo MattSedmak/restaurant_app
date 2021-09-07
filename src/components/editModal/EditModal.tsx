@@ -31,8 +31,8 @@ const EditModal = (props: IShowModalProps) => {
   });
 
   // **** START AXIOS ****
-  // const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
-  const baseUrl: string = 'http://localhost:4000';
+  const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
+  // const baseUrl: string = 'http://localhost:4000';
 
   const [resAvailable, setResAvailable] = useState(Boolean);
 
