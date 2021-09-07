@@ -100,6 +100,7 @@ export const CustomerForm = (props: IOnCustomerProps) => {
           placeholder='0712345678'
           required
 
+
         />
         <StyledLabel>Meddelande:</StyledLabel>
         <Information

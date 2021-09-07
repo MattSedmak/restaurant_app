@@ -20,8 +20,10 @@ const Admin = () => {
   };
 
   const getCustomer = async () => {
+
     const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
     // const baseUrl: string = 'http://localhost:4000';
+
     try {
       const res = await axios.get(baseUrl + '/find-booking', {
         params: {
