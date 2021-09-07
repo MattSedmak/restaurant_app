@@ -19,6 +19,9 @@ export const GuestNumberWrapper = styled.div`
   flex-wrap: wrap;
 `;
 
+interface IcolorProps {
+  selected: boolean;
+}
 export const GuestNumber = styled.div`
   width: 30px;
   height: 30px;
@@ -30,4 +33,6 @@ export const GuestNumber = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${(props: IcolorProps) => (props.selected ? '#333' : 'fff')};
+  color: ${(props: IcolorProps) => (props.selected ? '#fff' : '000')};
 `;
