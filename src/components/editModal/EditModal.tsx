@@ -2,11 +2,15 @@ import axios from 'axios';
 import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import '../editModal/editModal.css';
 import {
-  ActionButton,
+  AbortButton,
   ButtonDiv,
+  Information,
   Inputs,
   ModalForm,
   ModalMain,
+  RemoveButton,
+  StyledLabel,
+  UpdateButton,
 } from '../editModal/EditModalStyle';
 
 interface IShowModalProps {
@@ -117,6 +121,7 @@ const EditModal = (props: IShowModalProps) => {
       <ModalMain>
         <ModalForm onSubmit={handelSubmit}>
           <div>
+            <h6>Tid för sittning:</h6>
             <label id='seating'>18</label>
             <input
               type='radio'
@@ -134,12 +139,14 @@ const EditModal = (props: IShowModalProps) => {
               onChange={changeHandler}
             />
           </div>
+          <StyledLabel>Ändra Antal gäster:</StyledLabel>
           <Inputs
             type='number'
             id='guests'
             value={upDatedCustomer.guests}
             onChange={changeHandler}
           />
+          <StyledLabel>Ändra datum:</StyledLabel>
           <Inputs
             type='string'
             id='date'
@@ -147,6 +154,7 @@ const EditModal = (props: IShowModalProps) => {
             className={resAvailable ? '' : 'unavailable'}
             onChange={changeHandler}
           />
+          <StyledLabel>Information om gästen:</StyledLabel>
           <Inputs
             type='text'
             id='firstName'
@@ -175,17 +183,17 @@ const EditModal = (props: IShowModalProps) => {
             onChange={changeHandler}
             placeholder='Mobile'
           />
-          <textarea
+          <Information
             id='information'
             value={upDatedCustomer.information}
             onChange={changeHandler}
-            placeholder='Info'
+            placeholder='Meddelande till restaurang...'
           />
-          <ActionButton type='submit'>Update</ActionButton>
+          <UpdateButton type='submit'>Uppdatera</UpdateButton>
         </ModalForm>
         <ButtonDiv>
-          <ActionButton onClick={cancelUpdate}>Cancel</ActionButton>
-          <ActionButton onClick={deleteBooking}>Delete</ActionButton>
+            <AbortButton>Avbryt</AbortButton>
+            <RemoveButton>Ta Bort Bokning</RemoveButton>
         </ButtonDiv>
       </ModalMain>
     </div>
