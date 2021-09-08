@@ -20,12 +20,12 @@ export const Start = () => {
   }
 
   return (
-    <div>
+    <>
       <Hero />
       <GdprPopup
         showPopup={gdprPopup}
         closePopup={closeGdprPopup}
       />
-    </div>
+    </>
   );
 };

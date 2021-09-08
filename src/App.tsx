@@ -5,6 +5,7 @@ import { GlobalStyle } from './GlobalStyle';
 import Admin from './pages/admin/Admin';
 import Booking from './pages/booking/Booking';
 import Confirmation from './pages/confirmation/Confirmation';
+import Contact from './pages/contact/Contact';
 import { Start } from './pages/start/Start';
 
 function App() {
@@ -14,6 +15,9 @@ function App() {
       <Switch>
         <Route exact path='/'>
           <Start />
+        </Route>
+        <Route path='/contact'>
+          <Contact />
         </Route>
         <Route path='/booking'>
           <Booking />
