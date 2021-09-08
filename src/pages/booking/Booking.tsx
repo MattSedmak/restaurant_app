@@ -144,7 +144,7 @@ const Booking = () => {
       {redirect && (
         <Redirect to={{ pathname: '/confirmation', state: completeBooking }} />
       )}
-      <h1>The 3 Dude's</h1>
+      <h1>The 3 Dudes</h1>
       <Seating onSeatTime={seatingHandler} />
       {showGuests && <Guests onGuestSelect={guestHandler} />}
 
