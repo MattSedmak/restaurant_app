@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { FaTimes } from 'react-icons/fa';
+import { GrClose } from "react-icons/gr";
 
 export const SidebarContainer = styled.aside`
     position: fixed;
     z-index: 1000;
-    width: 350px;
+    width: 300px;
     height: 100%;
-    background: linear-gradient(to left, #734b6d, #42275a);
+    background-color: #DAD4C5;
     display: grid;
     align-items: center;
     top: 0;
@@ -17,7 +17,7 @@ export const SidebarContainer = styled.aside`
         width: 100%;
     }
 `
-export const CloseIcon = styled(FaTimes)`
+export const CloseIcon = styled(GrClose)`
     color: #000;
 `
 export const Icon = styled.div`
