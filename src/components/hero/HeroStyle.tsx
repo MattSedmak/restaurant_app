@@ -41,21 +41,22 @@ export const HeroTitle = styled.h1`
 `
 export const HeroText = styled.p`
     font-size: clamp(2rem, 2.5vw, 3rem);
+    font-weight: 300;
     margin-bottom: 2rem;
 `
 export const NavLink = styled(Link)`
     font-size: 1.4rem;
+    font-weight: 300;
     padding: 1rem 4rem;
     border: none;
-    background: #DAD4C5;
-    color: #000;
+    background: #006edc;
+    color: #fff;
     text-decoration: none;
-    transition: 0.2s ease-out;
+    transition: 0.2s ease-in-out;
 
     &:hover {
-        background: grey;
-        transition: 0.2s ease-out;
+        transition: 0.2s ease-in-out;
         cursor: pointer;
-        color: #DAD4C5;
+        opacity: 0.8;
     }
 `

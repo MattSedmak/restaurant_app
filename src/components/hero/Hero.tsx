@@ -17,7 +17,7 @@ const Hero = () => {
             <HeroContent>
                 <HeroItems>
                     <HeroTitle>Eat. Drink. Dream.</HeroTitle>
-                    <HeroText>En oförglömlig kväll</HeroText>
+                    <HeroText>En oförglömlig upplevelse</HeroText>
                     <NavLink to="/booking">Boka bord</NavLink>
                 </HeroItems>
             </HeroContent>
