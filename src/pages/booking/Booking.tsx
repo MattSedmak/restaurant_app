@@ -35,6 +35,7 @@ const Booking = () => {
   const [showGuests, setShowGuests] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [showForm, setShowForm] = useState(false);
+
   const [redirect, setRedirect] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -62,9 +63,7 @@ const Booking = () => {
   }, [allBookings]);
 
   const filterDates = () => {
-    let falseDates = allBookings.filter(
-      (booking) => booking.isAvailable === false
-    );
+    let falseDates = allBookings.filter((booking) => booking.isAvailable === false);
     setIsNotAvailable(falseDates);
   };
   console.log(isNotAvailable);
@@ -160,7 +159,7 @@ const Booking = () => {
       {redirect && (
         <Redirect to={{ pathname: '/confirmation', state: completeBooking }} />
       )}
-      <h1>The 3 Dudes</h1>
+
       {showSeating && <Seating onSeatTime={seatingHandler} />}
       {showGuests && <Guests onGuestSelect={guestHandler} />}
 

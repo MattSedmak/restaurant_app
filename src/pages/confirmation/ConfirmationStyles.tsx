@@ -16,6 +16,14 @@ export const Container = styled.div`
 export const Pinfo = styled.p`
   font-size: 1.1em;
   margin: 0.5em;
+
+  strong {
+    text-transform: capitalize;
+  }
+`;
+export const Confirm = styled.p`
+  font-size: 0.8em;
+  margin: 0.5em;
 `;
 
 export const StyledButton = styled.button`

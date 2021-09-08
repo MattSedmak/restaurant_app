@@ -1,15 +1,25 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const fade = keyframes`
+from{
+  opacity: 0;
+}
+
+to{
+  opacity:1;
+}
+`;
 
 export const FormContainer = styled.div`
   // border: 1px solid black;
-  width: 70%;
+  width: 80%;
   max-width: 40em;
   margin: 2em auto;
   padding: 1.5em;
   display: flex;
   flex-direction: column;
   text-align: center;
-  background-color: #f9f9f9;
+  animation: ${fade} 0.6s linear;
 
   h3 {
     margin-bottom: 2em;
