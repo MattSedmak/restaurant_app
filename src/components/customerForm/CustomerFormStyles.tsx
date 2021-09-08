@@ -9,7 +9,31 @@ export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
-  background-color: #f7f7f7;
+  background-color: #f9f9f9;
+
+  h3 {
+    margin-bottom: 2em;
+  }
+`;
+
+export const SummaryContainer = styled.div`
+  margin: 2em auto;
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  border-bottom: 1px solid #333;
+`;
+
+export const BookingDetail = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+  text-align: center;
+
+  label {
+    margin-bottom: 0.5em;
+    font-size: 1.2em;
+  }
 `;
 
 export const Input = styled.input`
@@ -55,7 +79,7 @@ export const Button = styled.button`
   border: #006edc;
   border-radius: 3px;
   color: #fff;
-  font-weight: bold;
+  /* font-weight: bold; */
   cursor: pointer;
   &:hover {
     opacity: 0.9;
