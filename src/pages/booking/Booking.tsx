@@ -58,7 +58,9 @@ const Booking = () => {
   }, [allBookings]);
 
   const filterDates = () => {
-    let falseDates = allBookings.filter((booking) => booking.isAvailable === false);
+    let falseDates = allBookings.filter(
+      (booking) => booking.isAvailable === false
+    );
     setIsNotAvailable(falseDates);
   };
   console.log(isNotAvailable);
