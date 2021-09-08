@@ -4,7 +4,7 @@ export const PopupMain = styled.div`
     position: fixed;
     background: #fff;
     width: 300px;
-    height: 290px;
+    height: 400px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -17,6 +17,7 @@ export const PopupMain = styled.div`
     padding: 1rem;
 
     h5 {
+        text-align: center;
         padding-top: 1rem;
         margin: 0;
     }

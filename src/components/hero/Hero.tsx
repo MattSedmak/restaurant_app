@@ -16,8 +16,8 @@ const Hero = () => {
             <Sidebar sideBar={isOpen} toggle={toggleSideBar}/>
             <HeroContent>
                 <HeroItems>
-                    <HeroTitle>Eat. Drink. Dream.</HeroTitle>
-                    <HeroText>En oförglömlig kväll</HeroText>
+                    <HeroTitle>Eat<br/> Drink<br/> Dream</HeroTitle>
+                    <HeroText>En oförglömlig upplevelse</HeroText>
                     <NavLink to="/booking">Boka bord</NavLink>
                 </HeroItems>
             </HeroContent>

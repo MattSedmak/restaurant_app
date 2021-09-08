@@ -5,13 +5,13 @@ import { RiMenu3Fill } from 'react-icons/ri'
 export const Nav = styled.nav`
     background: transparent;
     height: 80px;
-    max-width: 20em;
     display: flex;
     justify-content: flex-start;
 `
 export const NavLink = styled(Link)`
-    color: #fff;
-    font-size: 2rem;
+    font-family: 'Kalam', cursive;
+    color: #DAD4C5;
+    font-size: 3rem;
     font-weight: bold;
     display: flex;
     align-items: Center;
