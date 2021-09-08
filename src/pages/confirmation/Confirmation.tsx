@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router';
 import { ICustomerInfo } from '../../models/ICustomerInfo';
-import { Container, Pinfo, StyledButton } from './ConfirmationStyles';
+import { Confirm, Container, Pinfo, StyledButton } from './ConfirmationStyles';
 
 const Confirmation = (props: any) => {
   const customer: ICustomerInfo = props.location.state;
@@ -11,10 +11,10 @@ const Confirmation = (props: any) => {
   return (
     <Container>
       <h2>Varmt välkommen till The 3 Dudes!</h2>
-      <Pinfo>
-        Här är din bokningsbekräftelse. Vi har även skickat den till
+      <Confirm>
+        Vi har skickat din bokningsbekräftelse till
         <strong> {customer.email}</strong>
-      </Pinfo>
+      </Confirm>
       <Pinfo>
         <strong>
           {customer.firstName} {customer.lastName}

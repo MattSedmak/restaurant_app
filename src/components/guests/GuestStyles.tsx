@@ -1,8 +1,19 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const fade = keyframes`
+from{
+  opacity: 0;
+}
+
+to{
+  opacity:1;
+}
+`;
 
 export const Container = styled.div`
   margin-top: 4em;
   text-align: center;
+  animation: ${fade} 0.6s linear;
 
   p {
     font-size: 0.7em;

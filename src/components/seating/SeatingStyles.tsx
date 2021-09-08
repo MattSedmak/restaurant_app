@@ -1,4 +1,14 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const fade = keyframes`
+from{
+  opacity: 0;
+}
+
+to{
+  opacity:1;
+}
+`;
 
 export const Container = styled.div`
   // border: 1px solid black;
@@ -6,6 +16,7 @@ export const Container = styled.div`
   max-width: 40em;
   margin: 2em auto;
   text-align: center;
+  animation: ${fade} 0.6s linear;
 `;
 
 interface IcolorProps {
