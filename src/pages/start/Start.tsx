@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import GdprPopup from "../../components/gdpr/GdprPopup";
 import '../../components/gdpr/gdprPopup.css';
+import Hero from "../../components/hero/Hero";
 
 export const Start = () => {
   const [gdprPopup, setGdprPopup] = useState(false);
@@ -20,6 +21,7 @@ export const Start = () => {
 
   return (
     <div>
+      <Hero />
       <GdprPopup
         showPopup={gdprPopup}
         closePopup={closeGdprPopup}
