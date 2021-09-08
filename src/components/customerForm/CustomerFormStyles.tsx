@@ -85,3 +85,12 @@ export const Button = styled.button`
     opacity: 0.9;
   }
 `;
+
+export const CancelBtn = styled.button`
+  width: 60px;
+  height: 20px;
+  font-size: 0.7em;
+  cursor: pointer;
+  background-color: inherit;
+  border: 1px solid black;
+`;

@@ -1,10 +1,12 @@
 import React, { ChangeEvent, FormEvent, useCallback } from 'react';
 import { useState } from 'react';
 import { ICustomerInfo } from '../../models/ICustomerInfo';
+import { Link } from 'react-router-dom';
 
 import {
   BookingDetail,
   Button,
+  CancelBtn,
   FormContainer,
   Information,
   Input,
@@ -63,6 +65,10 @@ export const CustomerForm = (props: IOnCustomerProps) => {
     props.onCustomerHandler(formFields);
   };
 
+  const onCancel = () => {
+    window.location.reload();
+  };
+
   return (
     <FormContainer>
       <SummaryContainer>
@@ -78,6 +84,7 @@ export const CustomerForm = (props: IOnCustomerProps) => {
           <label>Tid</label>
           <strong>{props.seating}:00</strong>
         </BookingDetail>
+        <CancelBtn onClick={onCancel}>Ångra</CancelBtn>
       </SummaryContainer>
 
       <h3>Kontaktuppgifter</h3>
