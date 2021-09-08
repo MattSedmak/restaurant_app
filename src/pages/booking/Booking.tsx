@@ -11,6 +11,8 @@ import { BookingContainer, CalendarContainer } from './BookingStyles';
 import { Redirect } from 'react-router-dom';
 
 import Confirmation from '../confirmation/Confirmation';
+import Sidebar from '../../components/sidebar/Sidebar';
+import Navbar from '../../components/navbar/Navbar';
 
 const Booking = () => {
   const [completeBooking, setCompleteBooking] = useState<ICustomerInfo>({
@@ -34,6 +36,7 @@ const Booking = () => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [redirect, setRedirect] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
   // const baseUrl: string = 'http://localhost:4000';
@@ -145,7 +148,14 @@ const Booking = () => {
     setShowSeating(false);
   };
 
+  const toggleSideBar = () => {
+        setIsOpen(!isOpen)
+  }
+
   return (
+    <>
+    <Navbar toggle={toggleSideBar}/>
+    <Sidebar sideBar={isOpen} toggle={toggleSideBar}/>
     <BookingContainer>
       {redirect && (
         <Redirect to={{ pathname: '/confirmation', state: completeBooking }} />
@@ -175,6 +185,7 @@ const Booking = () => {
         />
       )}
     </BookingContainer>
+    </>
   );
 };
 
