@@ -25,7 +25,7 @@ export const ContactItems = styled.div`
     max-height: 100%;
     padding: 0 2rem;
     width: 100%;
-    color: #fff;
+    color: #DAD4C5;
     line-height: 1;
     font-weight: bold;
 
@@ -48,7 +48,7 @@ export const ContactDiv = styled.div`
 `
 export const ContactIconP = styled(GiSmartphone)`
     font-size: clamp(0.8rem, 5vw, 1.3rem);
-    color: #fff;
+    color: #DAD4C5;
 `
 export const ContactUs = styled.p`
     font-size: clamp(0.8rem, 5vw, 1.3rem);
@@ -58,5 +58,5 @@ export const ContactUs = styled.p`
 `
 export const ContactIconM = styled(GoMail)`
     font-size: clamp(0.8rem, 5vw, 1.3rem);
-    color: #fff;
+    color: #DAD4C5;
 `
