@@ -34,10 +34,8 @@ const Booking = () => {
   const [showForm, setShowForm] = useState(false);
   const [redirect, setRedirect] = useState(false);
 
-
-  const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
-  // const baseUrl: string = 'http://localhost:4000';
-
+  // const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
+  const baseUrl: string = 'http://localhost:4000';
 
   const getAvailability = async () => {
     try {
@@ -60,7 +58,9 @@ const Booking = () => {
   }, [allBookings]);
 
   const filterDates = () => {
-    let falseDates = allBookings.filter((booking) => booking.isAvailable === false);
+    let falseDates = allBookings.filter(
+      (booking) => booking.isAvailable === false
+    );
     setIsNotAvailable(falseDates);
   };
   console.log(isNotAvailable);

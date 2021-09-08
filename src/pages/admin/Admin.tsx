@@ -4,7 +4,16 @@ import { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import ReservationDetails from '../../components/reservationDetails/ReservationDetails';
 import { ICustomerInfo } from '../../models/ICustomerInfo';
 import '../admin/AdminStyle';
-import { CustomerDetailsContainer, InnerContainer, SearchButton, SearchContainer, SearchForm, SearchInput, SearchLabel, SearchTitle } from '../admin/AdminStyle';
+import {
+  CustomerDetailsContainer,
+  InnerContainer,
+  SearchButton,
+  SearchContainer,
+  SearchForm,
+  SearchInput,
+  SearchLabel,
+  SearchTitle,
+} from '../admin/AdminStyle';
 
 const Admin = () => {
   const [customer, setCustomer] = useState('');
@@ -20,9 +29,8 @@ const Admin = () => {
   };
 
   const getCustomer = async () => {
-
-    const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
-    // const baseUrl: string = 'http://localhost:4000';
+    // const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
+    const baseUrl: string = 'http://localhost:4000';
 
     try {
       const res = await axios.get(baseUrl + '/find-booking', {
@@ -61,21 +69,19 @@ const Admin = () => {
   return (
     <SearchContainer>
       <InnerContainer>
-      <SearchTitle>Admin sök</SearchTitle>
-      <SearchForm onSubmit={handleSubmit}>
-        <SearchLabel id='efternamn'>Kundens efternamn: </SearchLabel>
-        <SearchInput
-          type='text'
-          placeholder='Efternamn'
-          name='efternamn'
-          onChange={handleChange}
-          value={customer}
-        />
-        <SearchButton type='submit'>Sök</SearchButton>
-      </SearchForm>
-      <CustomerDetailsContainer>
-      {foundCustomer}
-      </CustomerDetailsContainer>
+        <SearchTitle>Admin sök</SearchTitle>
+        <SearchForm onSubmit={handleSubmit}>
+          <SearchLabel id='efternamn'>Kundens efternamn: </SearchLabel>
+          <SearchInput
+            type='text'
+            placeholder='Efternamn'
+            name='efternamn'
+            onChange={handleChange}
+            value={customer}
+          />
+          <SearchButton type='submit'>Sök</SearchButton>
+        </SearchForm>
+        <CustomerDetailsContainer>{foundCustomer}</CustomerDetailsContainer>
       </InnerContainer>
     </SearchContainer>
   );
