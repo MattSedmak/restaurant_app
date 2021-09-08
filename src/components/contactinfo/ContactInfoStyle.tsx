@@ -39,16 +39,18 @@ export const ContactItems = styled.div`
 `
 export const ContactText = styled.p`
     font-size: clamp(0.8rem, 5vw, 1.3rem);
+    line-height: 1.6;
     letter-spacing: 3px;
     margin-top: 15rem;
     margin-bottom: 0.5rem;
 `
 export const ContactDiv = styled.div`
     display: flex;
+    margin-bottom: 0.4rem;
 `
 export const ContactIconP = styled(GiSmartphone)`
     font-size: clamp(0.8rem, 5vw, 1.3rem);
-    color: #DAD4C5;
+    color: #006edc;
 `
 export const ContactUs = styled.p`
     font-size: clamp(0.8rem, 5vw, 1.3rem);
@@ -58,5 +60,5 @@ export const ContactUs = styled.p`
 `
 export const ContactIconM = styled(GoMail)`
     font-size: clamp(0.8rem, 5vw, 1.3rem);
-    color: #DAD4C5;
+    color: #006edc;
 `
