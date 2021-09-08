@@ -24,7 +24,7 @@ const Cancel = () => {
       <h1>The 3 Dude's</h1>
       <p>See you next time!</p>
 
-      <a href='https://thedudes-restaurant.herokuapp.com/'>
+      <a href='http://localhost:3000/'>
         <CancelButton onClick={cancelBooking}>Bekräfta avbokning</CancelButton>
       </a>
     </CancelContainer>
