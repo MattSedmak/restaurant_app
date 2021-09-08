@@ -13,11 +13,11 @@ interface IcolorProps {
 }
 
 export const SeatingButton = styled.div`
-  border: 1px solid black;
+  border: 1px solid ${(props: IcolorProps) => (props.selected ? '#006edc' : '#000')};
   margin: 1em auto;
   padding: 1em;
   text-align: center;
-  background-color: ${(props: IcolorProps) => (props.selected ? '#333' : 'fff')};
-  color: ${(props: IcolorProps) => (props.selected ? '#fff' : '000')};
+  background-color: ${(props: IcolorProps) => (props.selected ? '#006edc' : 'fff')};
+  color: ${(props: IcolorProps) => (props.selected ? '#fff' : '#000')};
   cursor: pointer;
 `;

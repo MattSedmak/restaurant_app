@@ -29,6 +29,7 @@ const Booking = () => {
   const [isNotAvailable, setIsNotAvailable] = useState<IAvailable[]>([]);
   let disabledDates: any = [];
 
+  const [showSeating, setShowSeating] = useState(true);
   const [showGuests, setShowGuests] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [showForm, setShowForm] = useState(false);
@@ -139,6 +140,9 @@ const Booking = () => {
       date: value.toLocaleString('sv-SE').substring(0, 10),
     }));
     setShowForm(true);
+    setShowGuests(false);
+    setShowCalendar(false);
+    setShowSeating(false);
   };
 
   return (
@@ -146,8 +150,8 @@ const Booking = () => {
       {redirect && (
         <Redirect to={{ pathname: '/confirmation', state: completeBooking }} />
       )}
-      <h1>The 3 Dude's</h1>
-      <Seating onSeatTime={seatingHandler} />
+      <h1>The 3 Dudes</h1>
+      {showSeating && <Seating onSeatTime={seatingHandler} />}
       {showGuests && <Guests onGuestSelect={guestHandler} />}
 
       {showCalendar && (
@@ -162,7 +166,14 @@ const Booking = () => {
         </CalendarContainer>
       )}
 
-      {showForm && <CustomerForm onCustomerHandler={customerInfoHandler} />}
+      {showForm && (
+        <CustomerForm
+          onCustomerHandler={customerInfoHandler}
+          guest={completeBooking.guests}
+          date={completeBooking.date}
+          seating={completeBooking.seating}
+        />
+      )}
     </BookingContainer>
   );
 };
