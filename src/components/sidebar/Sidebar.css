@@ -1,0 +1,7 @@
+.remove-bar {
+    right: 0;
+}
+
+.show-bar {
+    right: -1000px;
+}
