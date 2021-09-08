@@ -1,7 +1,13 @@
 import axios from 'axios';
 import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import '../editModal/editModal.css';
-import { ActionButton, ButtonDiv, Inputs, ModalForm, ModalMain } from '../editModal/EditModalStyle';
+import {
+  ActionButton,
+  ButtonDiv,
+  Inputs,
+  ModalForm,
+  ModalMain,
+} from '../editModal/EditModalStyle';
 
 interface IShowModalProps {
   updatePage: () => void;
@@ -32,8 +38,8 @@ const EditModal = (props: IShowModalProps) => {
   });
 
   // **** START AXIOS ****
-  // const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
-  const baseUrl: string = 'http://localhost:4000';
+  const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
+  // const baseUrl: string = 'http://localhost:4000';
 
   const [resAvailable, setResAvailable] = useState(Boolean);
 
@@ -115,7 +121,7 @@ const EditModal = (props: IShowModalProps) => {
             <input
               type='radio'
               id='seating'
-              checked={upDatedCustomer.seating === 18}
+              checked={upDatedCustomer.seating == 18}
               value='18'
               onChange={changeHandler}
             />
@@ -123,7 +129,7 @@ const EditModal = (props: IShowModalProps) => {
             <input
               type='radio'
               id='seating'
-              checked={upDatedCustomer.seating === 21}
+              checked={upDatedCustomer.seating == 21}
               value='21'
               onChange={changeHandler}
             />
@@ -178,8 +184,8 @@ const EditModal = (props: IShowModalProps) => {
           <ActionButton type='submit'>Update</ActionButton>
         </ModalForm>
         <ButtonDiv>
-        <ActionButton onClick={cancelUpdate}>Cancel</ActionButton>
-        <ActionButton onClick={deleteBooking}>Delete</ActionButton>
+          <ActionButton onClick={cancelUpdate}>Cancel</ActionButton>
+          <ActionButton onClick={deleteBooking}>Delete</ActionButton>
         </ButtonDiv>
       </ModalMain>
     </div>
