@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 export const ReservationContainer = styled.div`
-    height: 300px;
+    height: 350px;
     width: 250px;
     display: flex;
+    overflow-wrap: break-word;
     flex-direction: column;
     justify-content: space-between;
     padding: 0.5rem;
