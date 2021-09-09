@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ModalMain = styled.div`
     position: fixed;
@@ -107,3 +107,4 @@ export const RemoveButton = styled.button`
         opacity: 0.8;
     }
 `
+

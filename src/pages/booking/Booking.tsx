@@ -50,7 +50,6 @@ const Booking = () => {
           seating: completeBooking.seating,
         },
       });
-
       setAllBookings(res.data);
     } catch (error) {
       console.log(error);
@@ -63,7 +62,9 @@ const Booking = () => {
   }, [allBookings]);
 
   const filterDates = () => {
-    let falseDates = allBookings.filter((booking) => booking.isAvailable === false);
+    let falseDates = allBookings.filter(
+      (booking) => booking.isAvailable === false
+    );
     setIsNotAvailable(falseDates);
   };
   console.log(isNotAvailable);
@@ -148,42 +149,44 @@ const Booking = () => {
   };
 
   const toggleSideBar = () => {
-        setIsOpen(!isOpen)
-  }
+    setIsOpen(!isOpen);
+  };
 
   return (
     <>
-    <Navbar toggle={toggleSideBar}/>
-    <Sidebar sideBar={isOpen} toggle={toggleSideBar}/>
-    <BookingContainer>
-      {redirect && (
-        <Redirect to={{ pathname: '/confirmation', state: completeBooking }} />
-      )}
-
-      {showSeating && <Seating onSeatTime={seatingHandler} />}
-      {showGuests && <Guests onGuestSelect={guestHandler} />}
-
-      {showCalendar && (
-        <CalendarContainer>
-          <h4>Vilken dag vill ni komma?</h4>
-          <Calendar
-            onChange={dateHandler}
-            minDate={new Date()}
-            tileDisabled={tileDisabled}
-            locale='sv-SE'
+      <Navbar toggle={toggleSideBar} />
+      <Sidebar sideBar={isOpen} toggle={toggleSideBar} />
+      <BookingContainer>
+        {redirect && (
+          <Redirect
+            to={{ pathname: '/confirmation', state: completeBooking }}
           />
-        </CalendarContainer>
-      )}
+        )}
 
-      {showForm && (
-        <CustomerForm
-          onCustomerHandler={customerInfoHandler}
-          guest={completeBooking.guests}
-          date={completeBooking.date}
-          seating={completeBooking.seating}
-        />
-      )}
-    </BookingContainer>
+        {showSeating && <Seating onSeatTime={seatingHandler} />}
+        {showGuests && <Guests onGuestSelect={guestHandler} />}
+
+        {showCalendar && (
+          <CalendarContainer>
+            <h4>Vilken dag vill ni komma?</h4>
+            <Calendar
+              onChange={dateHandler}
+              minDate={new Date()}
+              tileDisabled={tileDisabled}
+              locale='sv-SE'
+            />
+          </CalendarContainer>
+        )}
+
+        {showForm && (
+          <CustomerForm
+            onCustomerHandler={customerInfoHandler}
+            guest={completeBooking.guests}
+            date={completeBooking.date}
+            seating={completeBooking.seating}
+          />
+        )}
+      </BookingContainer>
     </>
   );
 };

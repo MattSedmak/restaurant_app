@@ -45,7 +45,7 @@ const EditModal = (props: IShowModalProps) => {
   const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
   // const baseUrl: string = 'http://localhost:4000';
 
-  const [resAvailable, setResAvailable] = useState(Boolean);
+  const [resAvailable, setResAvailable] = useState<boolean>(Boolean);
 
   const getAvailability = async () => {
     try {
@@ -58,6 +58,7 @@ const EditModal = (props: IShowModalProps) => {
         },
       });
       setResAvailable(res.data);
+      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -197,7 +198,9 @@ const EditModal = (props: IShowModalProps) => {
             placeholder='Meddelande till restaurang...'
             maxLength={100}
           />
-          <UpdateButton type='submit'>Uppdatera</UpdateButton>
+
+          <UpdateButton type='submit' disabled={!resAvailable}>Uppdatera</UpdateButton>
+
         </ModalForm>
         <ButtonDiv>
             <AbortButton onClick={cancelUpdate}>Avbryt</AbortButton>
