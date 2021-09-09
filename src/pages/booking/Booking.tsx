@@ -62,9 +62,7 @@ const Booking = () => {
   }, [allBookings]);
 
   const filterDates = () => {
-    let falseDates = allBookings.filter(
-      (booking) => booking.isAvailable === false
-    );
+    let falseDates = allBookings.filter((booking) => booking.isAvailable === false);
     setIsNotAvailable(falseDates);
   };
   console.log(isNotAvailable);
@@ -158,12 +156,10 @@ const Booking = () => {
       <Sidebar sideBar={isOpen} toggle={toggleSideBar} />
       <BookingContainer>
         {redirect && (
-          <Redirect
-            to={{ pathname: '/confirmation', state: completeBooking }}
-          />
+          <Redirect to={{ pathname: '/confirmation', state: completeBooking }} />
         )}
 
-        {showSeating && <Seating onSeatTime={seatingHandler} />}
+        <Seating onSeatTime={seatingHandler} />
         {showGuests && <Guests onGuestSelect={guestHandler} />}
 
         {showCalendar && (
