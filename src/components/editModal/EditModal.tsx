@@ -148,6 +148,7 @@ const EditModal = (props: IShowModalProps) => {
             onChange={changeHandler}
             required
             min={1}
+            max={12}
           />
           <StyledLabel>Ändra datum:</StyledLabel>
           <Inputs
