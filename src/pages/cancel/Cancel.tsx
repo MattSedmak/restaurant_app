@@ -21,7 +21,7 @@ const Cancel = () => {
 
   return (
     <CancelContainer>
-      <h1>The 3 Dude's</h1>
+      <h1>The 3 Dudes</h1>
       <p>See you next time!</p>
       <a href='http://localhost:3000/'>
         <CancelButton onClick={cancelBooking}>Bekräfta avbokning</CancelButton>
