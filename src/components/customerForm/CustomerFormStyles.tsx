@@ -67,7 +67,6 @@ export const Input = styled.input`
   border-radius: 3px;
   &:invalid {
     border: 1px solid #911733;
-    background-color: #f4b2bf;
   }
   @media (min-width: 800px) {
     width: 70%;
