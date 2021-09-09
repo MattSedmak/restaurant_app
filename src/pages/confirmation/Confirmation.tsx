@@ -1,6 +1,13 @@
 import { useHistory } from 'react-router';
 import { ICustomerInfo } from '../../models/ICustomerInfo';
-import { Confirm, Container, Pinfo, StyledButton } from './ConfirmationStyles';
+import {
+  Confirm,
+  Container,
+  H1Element,
+  Pinfo,
+  StyledButton,
+  UlElement,
+} from './ConfirmationStyles';
 
 const Confirmation = (props: any) => {
   const customer: ICustomerInfo = props.location.state;
@@ -15,15 +22,33 @@ const Confirmation = (props: any) => {
         Vi har skickat din bokningsbekräftelse till
         <strong> {customer.email}</strong>
       </Confirm>
-      <Pinfo>
-        <strong>
-          {customer.firstName} {customer.lastName}
-        </strong>
-      </Pinfo>
-      <Pinfo>{customer.guests} personer</Pinfo>
-      <Pinfo>Tid: {customer.seating}:00</Pinfo>
-      <Pinfo>Datum: {customer.date}</Pinfo>
-      <Pinfo>Meddelande: {customer.information}</Pinfo>
+      <H1Element>
+        {customer.firstName} {customer.lastName}
+      </H1Element>
+      <UlElement>
+        <li>
+          <Pinfo>
+            <strong>Gäster:</strong> {customer.guests} personer
+          </Pinfo>
+        </li>
+        <li>
+          <Pinfo>
+            <strong>Tid: </strong>
+            {customer.seating}:00
+          </Pinfo>
+        </li>
+        <li>
+          <Pinfo>
+            <strong>Datum:</strong> {customer.date}
+          </Pinfo>
+        </li>
+        <li>
+          <Pinfo>
+            <strong>Meddelande: </strong>
+            {customer.information}
+          </Pinfo>
+        </li>
+      </UlElement>
 
       <StyledButton onClick={goHome}>tillbaka till start</StyledButton>
     </Container>
