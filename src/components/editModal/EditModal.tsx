@@ -62,7 +62,6 @@ const EditModal = (props: IShowModalProps) => {
 
   useEffect(() => {
     getAvailability();
-    // disableUpdateButton();
   }, [upDatedCustomer.guests, upDatedCustomer.seating, upDatedCustomer.date]);
 
   const updateBooking = async () => {
