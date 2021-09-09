@@ -159,7 +159,7 @@ const Booking = () => {
           <Redirect to={{ pathname: '/confirmation', state: completeBooking }} />
         )}
 
-        <Seating onSeatTime={seatingHandler} />
+        {showSeating && <Seating onSeatTime={seatingHandler} />}
         {showGuests && <Guests onGuestSelect={guestHandler} />}
 
         {showCalendar && (
