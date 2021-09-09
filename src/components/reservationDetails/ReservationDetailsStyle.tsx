@@ -15,7 +15,7 @@ export const EditButton = styled.button`
     padding: 0.5rem;
     border: none;
     background-color: #000;
-    border-radius: 5px;
+    border-radius: 3px;
     color: #fff;
     cursor: pointer;
 
