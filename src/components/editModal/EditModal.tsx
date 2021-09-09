@@ -41,7 +41,7 @@ const EditModal = (props: IShowModalProps) => {
   const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
   // const baseUrl: string = 'http://localhost:4000';
 
-  const [resAvailable, setResAvailable] = useState(Boolean);
+  const [resAvailable, setResAvailable] = useState<boolean>(Boolean);
 
   const getAvailability = async () => {
     try {
@@ -54,6 +54,7 @@ const EditModal = (props: IShowModalProps) => {
         },
       });
       setResAvailable(res.data);
+      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -61,6 +62,7 @@ const EditModal = (props: IShowModalProps) => {
 
   useEffect(() => {
     getAvailability();
+    // disableUpdateButton();
   }, [upDatedCustomer.guests, upDatedCustomer.seating, upDatedCustomer.date]);
 
   const updateBooking = async () => {
@@ -181,7 +183,9 @@ const EditModal = (props: IShowModalProps) => {
             onChange={changeHandler}
             placeholder='Info'
           />
-          <ActionButton type='submit'>Update</ActionButton>
+          <ActionButton type='submit' disabled={!resAvailable}>
+            Update
+          </ActionButton>
         </ModalForm>
         <ButtonDiv>
           <ActionButton onClick={cancelUpdate}>Cancel</ActionButton>
