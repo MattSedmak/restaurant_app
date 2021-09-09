@@ -69,7 +69,7 @@ const Admin = () => {
 
   return (
     <SearchContainer>
-      <LogoLink to="/"><span data-content="The 3 Dudes"></span>The 3 Dudes</LogoLink>
+      <LogoLink to="/"><span data-content="3Dudes"></span>3Dudes</LogoLink>
       <InnerContainer>
         <NewBookingText>För ny bokning, klicka <BookingLink to="/booking">här</BookingLink></NewBookingText>
         <SearchForm onSubmit={handleSubmit}>
