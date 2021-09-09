@@ -1,18 +1,19 @@
 import axios from 'axios';
 import { ChangeEvent, FormEvent, useState, useEffect } from 'react';
-
 import ReservationDetails from '../../components/reservationDetails/ReservationDetails';
 import { ICustomerInfo } from '../../models/ICustomerInfo';
 import '../admin/AdminStyle';
 import {
+  BookingLink,
   CustomerDetailsContainer,
   InnerContainer,
+  LogoLink,
+  NewBookingText,
   SearchButton,
   SearchContainer,
   SearchForm,
   SearchInput,
   SearchLabel,
-  SearchTitle,
 } from '../admin/AdminStyle';
 
 const Admin = () => {
@@ -68,10 +69,11 @@ const Admin = () => {
 
   return (
     <SearchContainer>
+      <LogoLink to="/"><span data-content="The 3 Dudes"></span>The 3 Dudes</LogoLink>
       <InnerContainer>
-        <SearchTitle>Admin sök</SearchTitle>
+        <NewBookingText>För ny bokning, klicka <BookingLink to="/booking">här</BookingLink></NewBookingText>
         <SearchForm onSubmit={handleSubmit}>
-          <SearchLabel id='efternamn'>Kundens efternamn: </SearchLabel>
+          <SearchLabel id='efternamn'>För att ändra befintlig bokning, sök på efternamn: </SearchLabel>
           <SearchInput
             type='text'
             placeholder='Efternamn'
