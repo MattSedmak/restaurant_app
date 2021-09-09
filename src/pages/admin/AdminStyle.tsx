@@ -2,11 +2,12 @@ import styled from "styled-components";
 
 export const SearchContainer = styled.div`
     width: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #F0F0F1;
+    background-color: #DAD4C5;
     padding-bottom: 1rem;
 `
 export const InnerContainer = styled.div`
@@ -37,11 +38,11 @@ export const SearchLabel = styled.label`
 `
 
 export const SearchInput = styled.input`
-    border: none;
-    border-bottom: 1px solid #696969;
-    width: 200px;
-    padding: 1rem 1rem 0 0.4rem;
-    margin-bottom: 1rem;
+    border: 1px solid black;
+    margin-bottom: 0.5em;
+    padding: 0.7em;
+    width: 40%;
+    border-radius: 3px;
 
     &:focus {
         outline: none;
@@ -49,13 +50,13 @@ export const SearchInput = styled.input`
 `
 export const SearchButton = styled.button`
     border: none;
-    background-color: #000;
+    background-color: #006edc;
     color: #fff;
     font-size: 1rem;
-    width: 200px;
+    width: 40%;
     padding: 1rem;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 3px;
 
     &:hover {
         opacity: 0.8;
@@ -65,19 +66,13 @@ export const CustomerDetailsContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     @media (min-width: 768px) {
-        {
             grid-template-columns: 1fr 1fr;
-        }  
     }
     @media (min-width: 992px) {
-        {
-            grid-template-columns: 1fr 1fr 1fr;
-        }  
+            grid-template-columns: 1fr 1fr 1fr; 
     }
     @media (min-width: 1200px) {
-        {
             grid-template-columns: 1fr 1fr 1fr 1fr;
-        }  
     }
     grid-gap: 30px;
     padding: 0 20px 0 20px;
