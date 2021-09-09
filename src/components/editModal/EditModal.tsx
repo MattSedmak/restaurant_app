@@ -155,6 +155,7 @@ const EditModal = (props: IShowModalProps) => {
             id='date'
             value={upDatedCustomer.date.substring(0, 10)}
             onChange={changeHandler}
+            className={resAvailable ? '' : 'unavailable'}
             required
           />
           <StyledLabel>Information om gästen:</StyledLabel>
@@ -199,12 +200,13 @@ const EditModal = (props: IShowModalProps) => {
             maxLength={100}
           />
 
-          <UpdateButton type='submit' disabled={!resAvailable}>Uppdatera</UpdateButton>
-
+          <UpdateButton type='submit' disabled={!resAvailable}>
+            Uppdatera
+          </UpdateButton>
         </ModalForm>
         <ButtonDiv>
-            <AbortButton onClick={cancelUpdate}>Avbryt</AbortButton>
-            <RemoveButton onClick={deleteBooking}>Ta Bort Bokning</RemoveButton>
+          <AbortButton onClick={cancelUpdate}>Avbryt</AbortButton>
+          <RemoveButton onClick={deleteBooking}>Ta Bort Bokning</RemoveButton>
         </ButtonDiv>
       </ModalMain>
     </div>
