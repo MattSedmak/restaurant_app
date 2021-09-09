@@ -7,6 +7,7 @@ import Booking from './pages/booking/Booking';
 import Cancel from './pages/cancel/Cancel';
 import Confirmation from './pages/confirmation/Confirmation';
 import Contact from './pages/contact/Contact';
+import PageNotFound from './pages/Page404/PageNotFound';
 import { Start } from './pages/start/Start';
 
 function App() {
@@ -30,6 +31,9 @@ function App() {
           <Cancel />
         </Route>
         <Route path='/confirmation' component={Confirmation} />
+        <Route path='*'>
+          <PageNotFound />
+        </Route>
       </Switch>
     </Router>
   );
