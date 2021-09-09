@@ -46,6 +46,7 @@ export const UlElement = styled.ul`
 `;
 
 export const H1Element = styled.h1`
+  text-transform: capitalize;
   font-size: 3rem;
   margin: 0.5em;
   color: #383838;
