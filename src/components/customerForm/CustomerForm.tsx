@@ -97,6 +97,7 @@ export const CustomerForm = (props: IOnCustomerProps) => {
           value={formFields.firstName}
           onChange={createChangeHandler('firstName')}
           placeholder='Ditt Förrnamn'
+          maxLength={20}
           required
         />
         <StyledLabel>Efternamn:</StyledLabel>
@@ -106,6 +107,7 @@ export const CustomerForm = (props: IOnCustomerProps) => {
           value={formFields.lastName}
           onChange={createChangeHandler('lastName')}
           placeholder='Ditt Efternamn'
+          maxLength={20}
           required
         />
         <StyledLabel>E-post:</StyledLabel>
@@ -117,7 +119,7 @@ export const CustomerForm = (props: IOnCustomerProps) => {
           placeholder='E-post'
           required
         />
-        <StyledLabel>Telefon:</StyledLabel>
+        <StyledLabel>Mobil:</StyledLabel>
         <Input
           type='tel'
           id='mobile'
