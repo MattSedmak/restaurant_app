@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ModalMain = styled.div`
     position: fixed;
     background: #DAD4C5;
-    width: 50%;
+    width: 40%;
     min-width: 300px;
     height: auto;
     top: 50%;
@@ -37,6 +37,15 @@ export const Inputs = styled.input`
     padding: 0.7em;
     width: 70%;
     border-radius: 3px;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:invalid {
+      border: 2px solid #911733;
+      background-color: #F4B2BF; 
+    }
 `
 export const Information = styled.textarea`
   resize: vertical;

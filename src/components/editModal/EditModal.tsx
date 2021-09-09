@@ -145,14 +145,16 @@ const EditModal = (props: IShowModalProps) => {
             id='guests'
             value={upDatedCustomer.guests}
             onChange={changeHandler}
+            required
+            min={1}
           />
           <StyledLabel>Ändra datum:</StyledLabel>
           <Inputs
             type='string'
             id='date'
             value={upDatedCustomer.date.substring(0, 10)}
-            className={resAvailable ? '' : 'unavailable'}
             onChange={changeHandler}
+            required
           />
           <StyledLabel>Information om gästen:</StyledLabel>
           <Inputs
@@ -160,40 +162,46 @@ const EditModal = (props: IShowModalProps) => {
             id='firstName'
             value={upDatedCustomer.firstName}
             onChange={changeHandler}
-            placeholder=''
+            required
+            minLength={2}
+            maxLength={20}
           />
           <Inputs
             type='text'
             id='lastName'
             value={upDatedCustomer.lastName}
             onChange={changeHandler}
-            placeholder='Last name'
+            required
+            minLength={2}
+            maxLength={20}
           />
           <Inputs
             type='email'
             id='email'
             value={upDatedCustomer.email}
             onChange={changeHandler}
-            placeholder='Email'
+            required
           />
           <Inputs
             type='tel'
             id='mobile'
             value={upDatedCustomer.mobile}
             onChange={changeHandler}
-            placeholder='Mobile'
+            required
+            pattern='[0-9]{10}'
           />
           <Information
             id='information'
             value={upDatedCustomer.information}
             onChange={changeHandler}
             placeholder='Meddelande till restaurang...'
+            maxLength={100}
           />
           <UpdateButton type='submit'>Uppdatera</UpdateButton>
         </ModalForm>
         <ButtonDiv>
-            <AbortButton>Avbryt</AbortButton>
-            <RemoveButton>Ta Bort Bokning</RemoveButton>
+            <AbortButton onClick={cancelUpdate}>Avbryt</AbortButton>
+            <RemoveButton onClick={deleteBooking}>Ta Bort Bokning</RemoveButton>
         </ButtonDiv>
       </ModalMain>
     </div>
