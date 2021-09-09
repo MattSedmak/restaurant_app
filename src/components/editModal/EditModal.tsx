@@ -158,7 +158,7 @@ const EditModal = (props: IShowModalProps) => {
             className={resAvailable ? '' : 'unavailable'}
             required
           />
-          <StyledLabel>Information om gästen:</StyledLabel>
+          <StyledLabel>Förnamn:</StyledLabel>
           <Inputs
             type='text'
             id='firstName'
@@ -168,6 +168,7 @@ const EditModal = (props: IShowModalProps) => {
             minLength={2}
             maxLength={20}
           />
+          <StyledLabel>Efternamn:</StyledLabel>
           <Inputs
             type='text'
             id='lastName'
@@ -177,6 +178,7 @@ const EditModal = (props: IShowModalProps) => {
             minLength={2}
             maxLength={20}
           />
+          <StyledLabel>Email:</StyledLabel>
           <Inputs
             type='email'
             id='email'
@@ -184,6 +186,7 @@ const EditModal = (props: IShowModalProps) => {
             onChange={changeHandler}
             required
           />
+          <StyledLabel>Mobilnummer</StyledLabel>
           <Inputs
             type='tel'
             id='mobile'
@@ -206,7 +209,7 @@ const EditModal = (props: IShowModalProps) => {
         </ModalForm>
         <ButtonDiv>
           <AbortButton onClick={cancelUpdate}>Avbryt</AbortButton>
-          <RemoveButton onClick={deleteBooking}>Ta Bort Bokning</RemoveButton>
+          <RemoveButton onClick={deleteBooking}>Radera</RemoveButton>
         </ButtonDiv>
       </ModalMain>
     </div>

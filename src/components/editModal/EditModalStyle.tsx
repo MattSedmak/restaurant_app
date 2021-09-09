@@ -3,8 +3,9 @@ import styled from 'styled-components';
 export const ModalMain = styled.div`
   position: fixed;
   background: #dad4c5;
-  width: 40%;
+  width: 90%;
   min-width: 300px;
+  max-width: 40em;
   height: auto;
   top: 50%;
   left: 50%;
@@ -15,6 +16,14 @@ export const ModalMain = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  @media screen and (min-width: 500px) {
+    width: 70%;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 50%;
+  }
 `;
 export const ModalForm = styled.form`
   width: 100%;
@@ -24,7 +33,7 @@ export const ModalForm = styled.form`
   flex-direction: column;
 `;
 export const StyledLabel = styled.label`
-  font-size: 0.8em;
+  font-size: 0.7em;
   margin-bottom: 0.5em;
   width: 70%;
   display: flex;
@@ -52,7 +61,6 @@ export const Information = styled.textarea`
   overflow: auto;
   border: 1px solid black;
   border-radius: 3px;
-  margin-bottom: 1em;
   padding: 0.5em;
   width: 70%;
   max-width: 40em;
@@ -60,7 +68,7 @@ export const Information = styled.textarea`
 
 export const UpdateButton = styled.button`
   width: 50%;
-  margin: 1em;
+  margin: 1em 0 0.5em 0;
   padding: 1em;
   background-color: #006edc;
   border: #006edc;
@@ -83,13 +91,12 @@ export const ButtonDiv = styled.div`
   width: 50%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: space-between;
 `;
 export const AbortButton = styled.button`
-  width: 100%;
-  padding: 1em;
-  margin: 1em;
+  width: 40%;
+  padding: .5em;
+  margin-top: 0.3em;
   border: none;
   background-color: #000;
   border-radius: 3px;
@@ -101,9 +108,9 @@ export const AbortButton = styled.button`
   }
 `;
 export const RemoveButton = styled.button`
-  width: 100%;
-  padding: 1em;
-  margin: 1em;
+  width: 40%;
+  padding: .5em;
+  margin-top: 0.3em;
   border: none;
   background-color: #911733;
   border-radius: 3px;
