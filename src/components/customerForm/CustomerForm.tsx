@@ -1,7 +1,6 @@
-import React, { ChangeEvent, FormEvent, useCallback } from 'react';
+import { ChangeEvent, FormEvent } from 'react';
 import { useState } from 'react';
 import { ICustomerInfo } from '../../models/ICustomerInfo';
-import { Link } from 'react-router-dom';
 
 import {
   BookingDetail,

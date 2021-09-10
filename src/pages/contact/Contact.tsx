@@ -1,8 +1,6 @@
 import ContactInfo from "../../components/contactinfo/ContactInfo"
 
-const Contact = () => {
-    
-    
+const Contact = () => {  
     return (
         <div>
           <ContactInfo />

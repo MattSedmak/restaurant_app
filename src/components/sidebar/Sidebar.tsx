@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {SidebarContainer, Icon, CloseIcon, SidebarMenu, SidebarLink} from './SidebarStyle';
 import './Sidebar.css';
 

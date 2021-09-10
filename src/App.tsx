@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { GlobalStyle } from './GlobalStyle';
 import Admin from './pages/admin/Admin';

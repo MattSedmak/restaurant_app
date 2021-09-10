@@ -9,8 +9,6 @@ import CustomerForm from '../../components/customerForm/CustomerForm';
 import { ICustomerInfo } from '../../models/ICustomerInfo';
 import { BookingContainer, CalendarContainer } from './BookingStyles';
 import { Redirect } from 'react-router-dom';
-
-import Confirmation from '../confirmation/Confirmation';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Navbar from '../../components/navbar/Navbar';
 
@@ -29,7 +27,7 @@ const Booking = () => {
 
   const [allBookings, setAllBookings] = useState<IAvailable[]>([]);
   const [isNotAvailable, setIsNotAvailable] = useState<IAvailable[]>([]);
-  let disabledDates: any = [];
+  let disabledDates: string[] = [];
 
   const [showSeating, setShowSeating] = useState(true);
   const [showGuests, setShowGuests] = useState(false);
@@ -55,7 +53,6 @@ const Booking = () => {
       console.log(error);
     }
   };
-  console.log(allBookings);
 
   useEffect(() => {
     filterDates();
@@ -65,18 +62,15 @@ const Booking = () => {
     let falseDates = allBookings.filter((booking) => booking.isAvailable === false);
     setIsNotAvailable(falseDates);
   };
-  console.log(isNotAvailable);
 
   for (let i = 0; i < isNotAvailable.length; i++) {
     let fullDate = isNotAvailable[i].date;
     disabledDates.push(fullDate);
   }
-  console.log('disabledDates: ' + disabledDates);
 
   const postBooking = async () => {
     try {
       const res = await axios.post(baseUrl + '/add-booking', completeBooking);
-      console.log(res.data.message);
     } catch (error) {
       console.log(error);
     }

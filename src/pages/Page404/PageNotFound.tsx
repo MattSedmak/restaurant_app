@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { Container, Logo, StyledLink } from './PageNotFoundStyles';
 
 const PageNotFound = () => {

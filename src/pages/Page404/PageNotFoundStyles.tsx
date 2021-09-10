@@ -5,7 +5,6 @@ export const Container = styled.div`
   max-width: 40em;
   margin: 5em auto;
   padding: 2em;
-  /* background-color: #fff; */
   text-align: center;
 
   p {
