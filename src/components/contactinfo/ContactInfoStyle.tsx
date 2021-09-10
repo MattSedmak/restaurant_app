@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import heroImg from '../../images/heroimage.jpg';
+import contactImg from '../../images/contactimage.jpg';
 import { GiSmartphone } from 'react-icons/gi';
 import { GoMail} from 'react-icons/go';
 
 export const ContactContainer = styled.div`
     background: linear-gradient(to right, rgba(0, 0, 0, 0.7),
     rgba(0, 0, 0, 0.1)), 
-    url(${heroImg});
+    url(${contactImg});
     height: 100vh;
     background-position: center;
     background-size: cover;

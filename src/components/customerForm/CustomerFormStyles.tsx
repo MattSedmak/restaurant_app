@@ -11,7 +11,6 @@ to{
 `;
 
 export const FormContainer = styled.div`
-  // border: 1px solid black;
   width: 100%;
   max-width: 40em;
   margin: 2em auto;

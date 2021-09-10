@@ -1,4 +1,3 @@
-import { setPriority } from 'os';
 import { useState } from 'react';
 import { Container, SeatingButton } from './SeatingStyles';
 
@@ -9,7 +8,6 @@ interface IOnSeatTimeProps {
 const Seating = (props: IOnSeatTimeProps) => {
   const [firstSeating, setFirstSeating] = useState(false);
   const [secSeating, setSecSeating] = useState(false);
-  // const [firstSeating, setFirstSeating] = useState(false);
 
   const onFirstSeating = () => {
     setFirstSeating(!firstSeating);

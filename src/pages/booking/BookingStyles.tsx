@@ -18,7 +18,6 @@ export const BookingContainer = styled.div`
   text-align: center;
   background-color: #fff;
   animation: ${fade} 0.6s ease;
-  /* box-shadow: 0 2px 8px rgba(168, 168, 168, 0.5); */
 `;
 
 export const CalendarContainer = styled.div`
