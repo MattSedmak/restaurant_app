@@ -79,10 +79,7 @@ export const BookingLink = styled(Link)`
     &:hover {
         background-color: #006edc;
     }
-
-
 `
-
 export const SearchLabel = styled.label`
     font-size: 1rem;
     margin-bottom: 1rem;

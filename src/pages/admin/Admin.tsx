@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ChangeEvent, FormEvent, useState, useEffect } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import ReservationDetails from '../../components/reservationDetails/ReservationDetails';
 import { ICustomerInfo } from '../../models/ICustomerInfo';
 import '../admin/AdminStyle';

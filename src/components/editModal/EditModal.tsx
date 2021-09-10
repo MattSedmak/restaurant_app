@@ -41,7 +41,6 @@ const EditModal = (props: IShowModalProps) => {
     date: props.date,
   });
 
-  // **** START AXIOS ****
   const baseUrl: string = 'https://thedudes-restaurant.herokuapp.com';
   // const baseUrl: string = 'http://localhost:4000';
 
@@ -58,7 +57,6 @@ const EditModal = (props: IShowModalProps) => {
         },
       });
       setResAvailable(res.data);
-      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -76,7 +74,6 @@ const EditModal = (props: IShowModalProps) => {
       );
       props.updatePage();
       props.hideModal();
-      console.log(res.data.message);
     } catch (error) {
       console.log(error);
     }
@@ -84,16 +81,14 @@ const EditModal = (props: IShowModalProps) => {
 
   const deleteBooking = async () => {
     try {
-      const res = await axios.delete(baseUrl + `/delete-booking/${props.id}`);
+      await axios.delete(baseUrl + `/delete-booking/${props.id}`);
       props.updatePage();
       props.hideModal();
-      console.log(res.data.message);
     } catch (error) {
       console.log(error);
     }
   };
 
-  // **** END AXIOS ****
   const cancelUpdate = () => {
     props.updatePage();
     props.hideModal();
