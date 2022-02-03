@@ -2,11 +2,11 @@
 
 ### Background
 
-3 week shcool project, first group project with React.
+3 week group project with React & Typescript.
 
 ### Team
 
-sedmak, joched, fredrikandre
+MattSedmak, joched, fredrikandre
 
 ## Restaurant Booking App - ReactJS (TS)
 
@@ -42,7 +42,7 @@ We created a SPA with ReactJS with our own backend [API](https://github.com/Matt
 
 - User first selects what time they would like to eat (18:00 (6:PM) or 21:00 (9:PM))
   Then the user can choose between 1 - 12 guests (1-6 == 1 table, 7-12 == 2 tables).
-- Then the react calendar appears showing availability for the current month, if a date is fully booked it will be disabled and the guest will be able to choose       that date.
+- Then the react calendar appears showing availability for the current month, if a date is fully booked it will be disabled and the guest will not be able to choose that date.
 - After the user clicks on the desired date the details form will pop up. The user can then fill in their details and confirm the booking.
 - After a successful booking the user will see a thank you message with the details of their booking, and receive a email with their booking information and a         cancelation link.
 
@@ -67,7 +67,7 @@ In the email there is a button that directs the user to our cancelation page, if
 - More tests
 - Creating our own form validations.
 - Use a Cookie for GDPR and not LocalStorage.
-- Refactoring - break down larger components into smaller components. This is our first React project, so with more experience and knowledge of React we should be     able to make it alot better and more “reactish” :-)
+- Refactoring - break down larger components into smaller components. With more experience and knowledge of React we should be able to make it a lot better and     more “reactish” :-)
 - Add confirmation email when user/admin deletes or edits a booking.
 - Add search by date/phone number function for admin - not just by lastname.
 - Fix phone number to 'string' with validation for MongoDB's deletion of 0.
